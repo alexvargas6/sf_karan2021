@@ -13,7 +13,7 @@ use Twig\Source;
 use Twig\Template;
 
 /* Macro/Utils.html.twig */
-class __TwigTemplate_8348ff62468d6b9bfdbb0656783faaf9f4ffaefbad92a6074e3e180de1ff17c8 extends Template
+class __TwigTemplate_2f31b56444f5ab3e8eb844189be046a00504c15ce1be002f3ee2a4ad3a249fcc extends Template
 {
     private $source;
     private $macros = [];
@@ -57,7 +57,7 @@ class __TwigTemplate_8348ff62468d6b9bfdbb0656783faaf9f4ffaefbad92a6074e3e180de1f
 
         $blocks = [];
 
-        ob_start(function () { return ''; });
+        ob_start();
         try {
             // line 23
             echo "    ";
@@ -110,7 +110,7 @@ class __TwigTemplate_8348ff62468d6b9bfdbb0656783faaf9f4ffaefbad92a6074e3e180de1f
 
         $blocks = [];
 
-        ob_start(function () { return ''; });
+        ob_start();
         try {
             // line 38
             echo "    ";
@@ -159,7 +159,7 @@ class __TwigTemplate_8348ff62468d6b9bfdbb0656783faaf9f4ffaefbad92a6074e3e180de1f
 
         $blocks = [];
 
-        ob_start(function () { return ''; });
+        ob_start();
         try {
             // line 52
             echo "    ";
@@ -194,6 +194,59 @@ class __TwigTemplate_8348ff62468d6b9bfdbb0656783faaf9f4ffaefbad92a6074e3e180de1f
 
     public function getSourceContext()
     {
-        return new Source("", "Macro/Utils.html.twig", "C:\\xampp\\htdocs\\sistema2\\Dinamic\\View\\Macro\\Utils.html.twig");
+        return new Source("{#
+/**
+ * This file is part of FacturaScripts
+ * Copyright (C) 2017-2022 Carlos Garcia Gomez <carlos@facturascripts.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+#}
+
+{# Muestra todos los mensajes con alguno de los niveles dados #}
+{% macro message(log, levels, style) %}
+    {% set messages = log.read('master', levels) | merge(log.read('database', levels)) %}
+    {% if messages | length > 0 %}
+        <div class=\"alert alert-{{ style }}\" role=\"alert\">
+            <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+                <span aria-hidden=\"true\">&times;</span>
+            </button>
+            {% for item in messages %}
+                <div>{{ item.message | raw }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endmacro %}
+
+{# Muestra todos los mensajes de los niveles dados, de forma que sea compatible con versiones antiguas de MiniLog #}
+{% macro messageCompat(log, levels, style) %}
+    {% for item in log.read() %}
+        {% if item.level in levels and item.channel == 'master' %}
+            <div class=\"alert alert-{{ style }}\" role=\"alert\">
+                <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+                    <span aria-hidden=\"true\">&times;</span>
+                </button>
+                <div>{{ item.message | raw }}</div>
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endmacro %}
+
+{# Muestra los parámetros necesarios para el popover #}
+{% macro popoverTitle(msg, position = 'auto') %}
+    {% if msg | length > 0 %}data-toggle=\"popover\" data-placement=\"{{ position }}\" data-trigger=\"hover\" data-content=\"{{ msg }}\"{% endif %}
+{% endmacro %}
+", "Macro/Utils.html.twig", "C:\\xampp\\htdocs\\sistema2\\Core\\View\\Macro\\Utils.html.twig");
     }
 }

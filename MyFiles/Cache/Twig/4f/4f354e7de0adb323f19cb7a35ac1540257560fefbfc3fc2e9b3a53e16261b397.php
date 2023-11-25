@@ -13,7 +13,7 @@ use Twig\Source;
 use Twig\Template;
 
 /* Macro/Menu.html.twig */
-class __TwigTemplate_12cdc55769afb6937b84cb15edfe6398cd5995a15e89e2d201a577fc658adb2a extends Template
+class __TwigTemplate_8267452bb3f03d880bc8eb22d377f8089eebcdf14a4d44e57a6f01b89e7a082a extends Template
 {
     private $source;
     private $macros = [];
@@ -50,7 +50,7 @@ class __TwigTemplate_12cdc55769afb6937b84cb15edfe6398cd5995a15e89e2d201a577fc658
 
         $blocks = [];
 
-        ob_start(function () { return ''; });
+        ob_start();
         try {
             // line 22
             echo "    ";
@@ -183,6 +183,64 @@ class __TwigTemplate_12cdc55769afb6937b84cb15edfe6398cd5995a15e89e2d201a577fc658
 
     public function getSourceContext()
     {
-        return new Source("", "Macro/Menu.html.twig", "C:\\xampp\\htdocs\\sistema2\\Dinamic\\View\\Macro\\Menu.html.twig");
+        return new Source("{#
+    /**
+     * This file is part of FacturaScripts
+     * Copyright (C) 2017-2019 Carlos Garcia Gomez <carlos@facturascripts.com>
+     *
+     * This program is free software: you can redistribute it and/or modify
+     * it under the terms of the GNU Lesser General Public License as
+     * published by the Free Software Foundation, either version 3 of the
+     * License, or (at your option) any later version.
+     *
+     * This program is distributed in the hope that it will be useful,
+     * but WITHOUT ANY WARRANTY; without even the implied warranty of
+     * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+     * GNU Lesser General Public License for more details.
+     *
+     * You should have received a copy of the GNU Lesser General Public License
+     * along with this program. If not, see <http://www.gnu.org/licenses/>.
+     */
+#}
+
+{% macro showMenu(menuItem, parent) %}
+    {% import _self as macros %}
+    {% set active = menuItem.active ? ' active' : '' %}
+    {% set menuId = parent is empty ? 'menu-' ~ menuItem.title : parent ~ menuItem.name %}
+
+    {% if parent is empty %}
+        {# Main level menu/submenu #}
+        <li class=\"nav-item dropdown{{ active }}\">
+            <a class=\"nav-link dropdown-toggle\" href=\"#\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
+                {% set title = menuItem.title %}
+                <span class=\"d-md-none\">{{ title | slice(0, 2) }}</span>
+                <span class=\"d-none d-md-inline-block\">{{ title }}</span>
+            </a>
+            <ul class=\"dropdown-menu\" aria-labelledby=\"{{ menuId }}\">
+    {% else %}
+        {# Child level submenu #}
+        <li class=\"dropdown-submenu\">
+            <a class=\"dropdown-item{{ active }}\" href=\"#\">
+                <i class=\"fas fa-folder-open fa-fw\" aria-hidden=\"true\"></i>
+                &nbsp;{{ menuItem.title }}
+            </a>
+            <ul class=\"dropdown-menu\" aria-labelledby=\"{{ menuId }}\">
+    {% endif %}
+
+    {% for item in menuItem.menu %}
+        {% set extraClass = item.active ? ' active' : '' %}
+
+        {% if item.menu is empty %}
+            <li>
+                <a class=\"dropdown-item{{ extraClass }}\" href=\"{{ item.url }}\">
+                    <i class=\"{{ item.icon }} fa-fw\" aria-hidden=\"true\"></i> &nbsp;{{ item.title }}
+                </a>
+            </li>
+        {% else %}
+            {{ macros.showMenu(item, menuId) }}
+        {% endif %}
+    {% endfor %}
+    </ul>
+{% endmacro %}", "Macro/Menu.html.twig", "C:\\xampp\\htdocs\\sistema2\\Core\\View\\Macro\\Menu.html.twig");
     }
 }

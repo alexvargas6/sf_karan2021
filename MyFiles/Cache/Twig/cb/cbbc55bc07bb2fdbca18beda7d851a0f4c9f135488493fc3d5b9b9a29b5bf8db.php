@@ -13,7 +13,7 @@ use Twig\Source;
 use Twig\Template;
 
 /* Master/MenuBghTemplate.html.twig */
-class __TwigTemplate_313d22d4e7c1c4915d97c7dc8362c31fca9dafe03c3ab34eaabf1165bbc8e49a extends Template
+class __TwigTemplate_80f5f684c645de4b7319063182d11d1d46efcd2020085362958b8b263b48a8d3 extends Template
 {
     private $source;
     private $macros = [];
@@ -141,6 +141,48 @@ class __TwigTemplate_313d22d4e7c1c4915d97c7dc8362c31fca9dafe03c3ab34eaabf1165bbc
 
     public function getSourceContext()
     {
-        return new Source("", "Master/MenuBghTemplate.html.twig", "C:\\xampp\\htdocs\\sistema2\\Dinamic\\View\\Master\\MenuBghTemplate.html.twig");
+        return new Source("{#
+/**
+ * This file is part of FacturaScripts
+ * Copyright (C) 2017-2021 Carlos Garcia Gomez <carlos@facturascripts.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program. If not, see http://www.gnu.org/licenses/.
+ */
+#}
+{% extends \"Master/MenuTemplate.html.twig\" %}
+
+{% block fullBody %}
+    <body>
+    {% block navbar %}
+        {{ parent() }}
+    {% endblock %}
+    <div class=\"bg-light pt-3\">
+        {% block messages %}
+            {{ parent() }}
+        {% endblock %}
+        {% block bodyHeaderOptions %}
+            {{ parent() }}
+        {% endblock %}
+    </div>
+    {% block body %}
+        {{ parent() }}
+    {% endblock %}
+    <br/>
+    <br/>
+    <br/>
+    {{ debugBarRender.render() | raw }}
+    </body>
+{% endblock %}", "Master/MenuBghTemplate.html.twig", "C:\\xampp\\htdocs\\sistema2\\Core\\View\\Master\\MenuBghTemplate.html.twig");
     }
 }

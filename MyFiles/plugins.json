@@ -15,5 +15,22 @@
         "require": [],
         "require_php": [],
         "version": 2.6
+    },
+    {
+        "compatible": true,
+        "description": "modulo de usuarios",
+        "enabled": true,
+        "folder": "asignacion_usuarios",
+        "hidden": false,
+        "installed": true,
+        "min_version": 2023,
+        "min_php": 7.2,
+        "name": "asignacion_usuarios",
+        "order": 2,
+        "post_disable": false,
+        "post_enable": true,
+        "require": [],
+        "require_php": [],
+        "version": 1.1
     }
 ]

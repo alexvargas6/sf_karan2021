@@ -1,0 +1,16 @@
+{% extends "Master/MenuBghTemplate.html.twig" %} {% block body %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      {# Definimos los usuarios directamente en el código #}
+        {# Incluimos el componente de la tabla Bootstrap y pasamos la lista de usuarios #}
+        {% include 'componentes/tabla.html.twig' with { 'usuarios': fsc.users } %}
+    </div>
+  </div>
+</div>
+<script>
+        $(document).ready(function() {
+            $('#tablaUsuarios').DataTable(); // Inicializa la DataTable
+        });
+    </script>
+{% endblock %}

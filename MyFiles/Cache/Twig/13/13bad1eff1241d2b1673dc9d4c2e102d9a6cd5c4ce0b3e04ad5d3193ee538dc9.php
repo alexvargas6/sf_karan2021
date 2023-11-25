@@ -13,7 +13,7 @@ use Twig\Source;
 use Twig\Template;
 
 /* Master/MicroTemplate.html.twig */
-class __TwigTemplate_6f9e2d4421050a15db02aee4c1f818468bcede7d51dfef9900276f876de75c5b extends Template
+class __TwigTemplate_7604ff8ad3b449ebb83fb57b751a51342a604645239f2a235494a4d240fda146 extends Template
 {
     private $source;
     private $macros = [];
@@ -245,6 +245,74 @@ class __TwigTemplate_6f9e2d4421050a15db02aee4c1f818468bcede7d51dfef9900276f876de
 
     public function getSourceContext()
     {
-        return new Source("", "Master/MicroTemplate.html.twig", "C:\\xampp\\htdocs\\sistema2\\Dinamic\\View\\Master\\MicroTemplate.html.twig");
+        return new Source("{#
+    /**
+     * This file is part of FacturaScripts
+     * Copyright (C) 2017-2023 Carlos Garcia Gomez <carlos@facturascripts.com>
+     *
+     * This program is free software: you can redistribute it and/or modify
+     * it under the terms of the GNU Lesser General Public License as
+     * published by the Free Software Foundation, either version 3 of the
+     * License, or (at your option) any later version.
+     *
+     * This program is distributed in the hope that it will be useful,
+     * but WITHOUT ANY WARRANTY; without even the implied warranty of
+     * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+     * GNU Lesser General Public License for more details.
+     *
+     * You should have received a copy of the GNU Lesser General Public License
+     * along with this program. If not, see http://www.gnu.org/licenses/.
+     *
+     */
+#}
+<!DOCTYPE html>
+<html xmlns=\"http://www.w3.org/1999/xhtml\" lang=\"{{ constant('FS_LANG') | slice(0, 2) }}\" xml:lang=\"{{ constant('FS_LANG') | slice(0, 2) }}\" >
+    <head>
+        {% block meta %}
+            <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />
+            <title>{{ fsc.title }}</title>
+            <meta name=\"description\" content=\"{{ trans('meta-description') }}\" />
+            <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />
+            <meta name=\"generator\" content=\"FacturaScripts\" />
+            <meta name=\"robots\" content=\"noindex\" />
+        {% endblock %}
+        {% block icons %}
+            <link rel=\"shortcut icon\" href=\"{{ asset('Dinamic/Assets/Images/favicon.ico') }}\" />
+            <link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"{{ asset('Dinamic/Assets/Images/apple-icon-180x180.png') }}\" />
+        {% endblock %}
+        {% block css %}
+            <link rel=\"stylesheet\" href=\"{{ asset('node_modules/bootstrap/dist/css/bootstrap.min.css') }}\" />
+            <link rel=\"stylesheet\" href=\"{{ asset('node_modules/@fortawesome/fontawesome-free/css/all.min.css') }}\"/>
+        {% endblock %}
+        {# Adds custom CSS assets #}
+        {% for css in assetManager.get('css') %}
+            <link rel=\"stylesheet\" href=\"{{ css }}\" />
+        {% endfor %}
+        {% block javascripts %}
+            <script src=\"{{ asset('node_modules/jquery/dist/jquery.min.js') }}\"></script>
+            <script src=\"{{ asset('node_modules/bootstrap/dist/js/bootstrap.bundle.min.js') }}\"></script>
+            <script src=\"{{ asset('node_modules/@fortawesome/fontawesome-free/js/all.min.js') }}\"></script>
+        {% endblock %}
+        {# Adds custom JS assets #}
+        {% for js in assetManager.get('js') %}
+            <script src=\"{{ js }}\"></script>
+        {% endfor %}
+        {{ debugBarRender.renderHead() | raw }}
+    </head>
+    {% block fullBody %}
+        <body>
+            {% block messages %}
+                {% from 'Macro/Utils.html.twig' import message as showMessage %}
+                {{ showMessage(log, ['error', 'critical'], 'danger') }}
+                {{ showMessage(log, ['warning'], 'warning') }}
+                {{ showMessage(log, ['notice'], 'success') }}
+                {{ showMessage(log, ['info'], 'info') }}
+            {% endblock %}
+            {% block body %}
+            {% endblock %}
+            {{ debugBarRender.render() | raw }}
+        </body>
+    {% endblock %}
+</html>", "Master/MicroTemplate.html.twig", "C:\\xampp\\htdocs\\sistema2\\Core\\View\\Master\\MicroTemplate.html.twig");
     }
 }

@@ -1,0 +1,32 @@
+{# components/tabla_bootstrap.html.twig #}
+<div class="card">
+  <div class="card-header">Asignación de Usuarios</div>
+  <div class="card-body">
+    <table id="tablaUsuarios" class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+
+          <th scope="col">Nick</th>
+          <!-- Agregamos nueva columna para el Nick -->
+          <th scope="col">Permisos</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for usuario in usuarios %}
+        <tr>
+          <th scope="row">{{ loop.index }}</th>
+
+          <td>{{ usuario.nick }}</td>
+          <!-- Mostramos el nick del usuario -->
+          <td>
+            <button class="btn btn-primary">Asignar o quitar</button>
+            <!-- Botón para Asignar -->
+            <!-- Puedes añadir lógica aquí para asignar permisos -->
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>

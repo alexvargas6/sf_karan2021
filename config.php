@@ -1,6 +1,6 @@
 <?php
 define('FS_COOKIES_EXPIRE', 31536000);
-define('FS_ROUTE', '/facturascripts');
+define('FS_ROUTE', '/sistema2');
 define('FS_DB_FOREIGN_KEYS', true);
 define('FS_DB_TYPE_CHECK', true);
 define('FS_MYSQL_CHARSET', 'utf8');
@@ -14,7 +14,6 @@ define('FS_DB_NAME', 'sistema1');
 define('FS_DB_USER', 'root');
 define('FS_DB_PASS', '');
 define('FS_HIDDEN_PLUGINS', '');
-define('FS_DEBUG', false);
+define('FS_DEBUG', true);
 define('FS_DISABLE_ADD_PLUGINS', false);
 define('FS_DISABLE_RM_PLUGINS', false);
-

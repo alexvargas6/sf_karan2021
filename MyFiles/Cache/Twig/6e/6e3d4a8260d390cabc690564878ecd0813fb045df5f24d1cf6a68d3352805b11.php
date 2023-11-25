@@ -12,8 +12,8 @@ use Twig\Sandbox\SecurityNotAllowedFunctionError;
 use Twig\Source;
 use Twig\Template;
 
-/* Master/MenuBghTemplate.html.twig */
-class __TwigTemplate_313d22d4e7c1c4915d97c7dc8362c31fca9dafe03c3ab34eaabf1165bbc8e49a extends Template
+/* Master/MenuBgTemplate.html.twig */
+class __TwigTemplate_f17e43fb58a2cf3808463882261fad498e6f1c6d1800ccbaa917c0b99db4a4a3 extends Template
 {
     private $source;
     private $macros = [];
@@ -42,7 +42,7 @@ class __TwigTemplate_313d22d4e7c1c4915d97c7dc8362c31fca9dafe03c3ab34eaabf1165bbc
     protected function doDisplay(array $context, array $blocks = [])
     {
         $macros = $this->macros;
-        $this->parent = $this->loadTemplate("Master/MenuTemplate.html.twig", "Master/MenuBghTemplate.html.twig", 20);
+        $this->parent = $this->loadTemplate("Master/MenuTemplate.html.twig", "Master/MenuBgTemplate.html.twig", 20);
         $this->parent->display($context, array_merge($this->blocks, $blocks));
     }
 
@@ -51,12 +51,12 @@ class __TwigTemplate_313d22d4e7c1c4915d97c7dc8362c31fca9dafe03c3ab34eaabf1165bbc
     {
         $macros = $this->macros;
         // line 23
-        echo "    <body>
+        echo "    <body class=\"bg-light\">
     ";
         // line 24
         $this->displayBlock('navbar', $context, $blocks);
         // line 27
-        echo "    <div class=\"bg-light pt-3\">
+        echo "    <div class=\"pt-3\">
         ";
         // line 28
         $this->displayBlock('messages', $context, $blocks);
@@ -126,7 +126,7 @@ class __TwigTemplate_313d22d4e7c1c4915d97c7dc8362c31fca9dafe03c3ab34eaabf1165bbc
 
     public function getTemplateName()
     {
-        return "Master/MenuBghTemplate.html.twig";
+        return "Master/MenuBgTemplate.html.twig";
     }
 
     public function isTraitable()
@@ -141,6 +141,6 @@ class __TwigTemplate_313d22d4e7c1c4915d97c7dc8362c31fca9dafe03c3ab34eaabf1165bbc
 
     public function getSourceContext()
     {
-        return new Source("", "Master/MenuBghTemplate.html.twig", "C:\\xampp\\htdocs\\sistema2\\Dinamic\\View\\Master\\MenuBghTemplate.html.twig");
+        return new Source("", "Master/MenuBgTemplate.html.twig", "C:\\xampp\\htdocs\\sistema2\\Dinamic\\View\\Master\\MenuBgTemplate.html.twig");
     }
 }
