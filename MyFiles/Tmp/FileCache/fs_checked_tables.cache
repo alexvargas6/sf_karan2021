@@ -1,1 +1,1 @@
-a:4:{i:0;s:8:"settings";i:1;s:5:"users";i:2;s:5:"pages";i:3;s:8:"empresas";}
+a:15:{i:0;s:8:"settings";i:1;s:5:"users";i:2;s:5:"pages";i:3;s:8:"empresas";i:4;s:13:"pages_options";i:5;s:13:"pages_filters";i:6;s:9:"almacenes";i:7;s:5:"roles";i:8;s:8:"api_keys";i:9;s:11:"idsfiscales";i:10;s:21:"secuencias_documentos";i:11;s:10:"ejercicios";i:12;s:6:"series";i:13;s:18:"estados_documentos";i:14;s:19:"formatos_documentos";}

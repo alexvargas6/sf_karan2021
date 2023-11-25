@@ -10,9 +10,9 @@ class AsignacionUsuariosController extends Controller
     public function getPageData(): array
     {
         $pagedata = parent::getPageData();
-        $pagedata['title'] = 'mi-titulo';
-        $pagedata['menu'] = 'mi-menu';
-        $pagedata['icon'] = 'mi-icono';
+        $pagedata['title'] = 'asignacion de usuarios';
+        $pagedata['menu'] = 'control';
+        $pagedata['icon'] = 'fas fa-users';
 
         return $pagedata;
     }

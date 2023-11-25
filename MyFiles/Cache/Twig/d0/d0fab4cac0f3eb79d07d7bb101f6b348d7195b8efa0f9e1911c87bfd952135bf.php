@@ -79,7 +79,7 @@ class __TwigTemplate_3e5fe6b933dc4c483f5a61e77a52d6ca4d93a8f187ce93b5108c96f1422
             echo "</td>
           <!-- Mostramos el nick del usuario -->
           <td>
-            <button class=\"btn btn-primary\">Asignar o quitar</button>
+            <button class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#permisosModal\">Asignar o quitar</button>
             <!-- Botón para Asignar -->
             <!-- Puedes añadir lógica aquí para asignar permisos -->
           </td>
@@ -144,7 +144,7 @@ class __TwigTemplate_3e5fe6b933dc4c483f5a61e77a52d6ca4d93a8f187ce93b5108c96f1422
           <td>{{ usuario.nick }}</td>
           <!-- Mostramos el nick del usuario -->
           <td>
-            <button class=\"btn btn-primary\">Asignar o quitar</button>
+            <button class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#permisosModal\">Asignar o quitar</button>
             <!-- Botón para Asignar -->
             <!-- Puedes añadir lógica aquí para asignar permisos -->
           </td>
