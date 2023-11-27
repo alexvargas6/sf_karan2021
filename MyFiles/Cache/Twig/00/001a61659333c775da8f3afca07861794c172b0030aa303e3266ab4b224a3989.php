@@ -40,7 +40,10 @@ class __TwigTemplate_accebede600ea1e086e99ca08766ce228c7c69b154a3a554f7e9f46c038
     <div class=\"modal-dialog\" role=\"document\">
       <div class=\"modal-content\">
         <div class=\"modal-header\">
-          <h5 class=\"modal-title\" id=\"permisosModalLabel\">Asignar/Quitar Permisos</h5>
+          <h5 class=\"modal-title\" id=\"permisosModalLabel\">Asignar/Quitar Permisos | ";
+        // line 7
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["usuario"] ?? null), "nick", [], "any", false, false, false, 7), "html", null, true);
+        echo "</h5>
           <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">
             <span aria-hidden=\"true\">&times;</span>
           </button>
@@ -49,10 +52,25 @@ class __TwigTemplate_accebede600ea1e086e99ca08766ce228c7c69b154a3a554f7e9f46c038
             <div class=\"form-group\">
               <label for=\"selectPermiso\">Seleccionar Permiso:</label>
               <select id=\"selectPermiso\" class=\"form-control\">
-                <option value=\"permiso1\">Permiso 1</option>
-                <option value=\"permiso2\">Permiso 2</option>
-                <!-- ... (más opciones de permisos) ... -->
-              </select>
+                ";
+        // line 16
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable(($context["roles"] ?? null));
+        foreach ($context['_seq'] as $context["_key"] => $context["role"]) {
+            // line 17
+            echo "                <option value=\"";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["role"], "codrol", [], "any", false, false, false, 17), "html", null, true);
+            echo "\">";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["role"], "descripcion", [], "any", false, false, false, 17), "html", null, true);
+            echo "</option>
+              ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['role'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 19
+        echo "              </select>
+             
             </div>
             
             <!-- Caja de etiquetas de permisos -->
@@ -88,6 +106,40 @@ class __TwigTemplate_accebede600ea1e086e99ca08766ce228c7c69b154a3a554f7e9f46c038
       \$(this).parent().remove(); // Elimina la etiqueta del permiso al hacer clic en el ícono
     });
   });
+
+  // Manejar el evento de abrir el modal.
+\$('#permisosModal').on('shown.bs.modal', function (event) {
+    // Obtenemos el botón que disparó el modal
+    var button = \$(event.relatedTarget);
+
+    // Obtenemos el nick del usuario a través del atributo data-nick
+    var nick = button.data('nick');
+    var baseUrl = window.location.origin;
+    // Llamar a la función AJAX que devuelve los roles de usuario
+    \$.ajax({
+        url: baseUrl + \"/sistema2/RolesUsuarios\",
+        method: 'GET',
+        headers: {
+            'Token': 'API_TOKEN'
+        },
+        data: {
+            nick: nick
+        },
+        success: function(data) {
+            // Limpiar el permisosBox
+            \$('#permisosBox').empty();
+            var dataArray = JSON.parse(data); // Convertir la cadena de texto a un array
+
+            // Agregar cada rol del usuario al permisosBox
+            dataArray.forEach(function (role) {
+                \$('#permisosBox').append('<span class=\"badge badge-primary mr-2 mb-2\">' + role.codrole + ' <i class=\"fas fa-times ml-1 eliminar-permiso\"></i></span>');
+            });
+        },
+        error: function(error){
+            console.log('Hubo un error al obtener los roles: ', error);
+        },
+    });
+});
 </script>";
     }
 
@@ -96,9 +148,14 @@ class __TwigTemplate_accebede600ea1e086e99ca08766ce228c7c69b154a3a554f7e9f46c038
         return "componentes/modal.html.twig";
     }
 
+    public function isTraitable()
+    {
+        return false;
+    }
+
     public function getDebugInfo()
     {
-        return array (  37 => 1,);
+        return array (  72 => 19,  61 => 17,  57 => 16,  45 => 7,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -109,7 +166,7 @@ class __TwigTemplate_accebede600ea1e086e99ca08766ce228c7c69b154a3a554f7e9f46c038
     <div class=\"modal-dialog\" role=\"document\">
       <div class=\"modal-content\">
         <div class=\"modal-header\">
-          <h5 class=\"modal-title\" id=\"permisosModalLabel\">Asignar/Quitar Permisos</h5>
+          <h5 class=\"modal-title\" id=\"permisosModalLabel\">Asignar/Quitar Permisos | {{ usuario.nick }}</h5>
           <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">
             <span aria-hidden=\"true\">&times;</span>
           </button>
@@ -118,10 +175,11 @@ class __TwigTemplate_accebede600ea1e086e99ca08766ce228c7c69b154a3a554f7e9f46c038
             <div class=\"form-group\">
               <label for=\"selectPermiso\">Seleccionar Permiso:</label>
               <select id=\"selectPermiso\" class=\"form-control\">
-                <option value=\"permiso1\">Permiso 1</option>
-                <option value=\"permiso2\">Permiso 2</option>
-                <!-- ... (más opciones de permisos) ... -->
+                {% for role in roles %}
+                <option value=\"{{ role.codrol }}\">{{ role.descripcion }}</option>
+              {% endfor %}
               </select>
+             
             </div>
             
             <!-- Caja de etiquetas de permisos -->
@@ -157,6 +215,40 @@ class __TwigTemplate_accebede600ea1e086e99ca08766ce228c7c69b154a3a554f7e9f46c038
       \$(this).parent().remove(); // Elimina la etiqueta del permiso al hacer clic en el ícono
     });
   });
+
+  // Manejar el evento de abrir el modal.
+\$('#permisosModal').on('shown.bs.modal', function (event) {
+    // Obtenemos el botón que disparó el modal
+    var button = \$(event.relatedTarget);
+
+    // Obtenemos el nick del usuario a través del atributo data-nick
+    var nick = button.data('nick');
+    var baseUrl = window.location.origin;
+    // Llamar a la función AJAX que devuelve los roles de usuario
+    \$.ajax({
+        url: baseUrl + \"/sistema2/RolesUsuarios\",
+        method: 'GET',
+        headers: {
+            'Token': 'API_TOKEN'
+        },
+        data: {
+            nick: nick
+        },
+        success: function(data) {
+            // Limpiar el permisosBox
+            \$('#permisosBox').empty();
+            var dataArray = JSON.parse(data); // Convertir la cadena de texto a un array
+
+            // Agregar cada rol del usuario al permisosBox
+            dataArray.forEach(function (role) {
+                \$('#permisosBox').append('<span class=\"badge badge-primary mr-2 mb-2\">' + role.codrole + ' <i class=\"fas fa-times ml-1 eliminar-permiso\"></i></span>');
+            });
+        },
+        error: function(error){
+            console.log('Hubo un error al obtener los roles: ', error);
+        },
+    });
+});
 </script>", "componentes/modal.html.twig", "C:\\xampp\\htdocs\\sistema2\\Plugins\\asignacion_usuarios\\View\\componentes\\modal.html.twig");
     }
 }

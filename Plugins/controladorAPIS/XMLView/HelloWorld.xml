@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+    <name>HelloWorld</name>
+    <model>HelloWorld</model>
+    <title>Hello World</title>
+    <columns>
+        <column>
+            <name>message</name>
+            <title>Message</title>
+        </column>
+    </columns>
+</view>

@@ -79,7 +79,7 @@ class __TwigTemplate_5d7fede2feca483b740a3b102e922f396331c829578c6d75d8aba3475fa
 </div>
 ";
         // line 20
-        $this->loadTemplate("componentes/modal.html.twig", "AsignacionUsuariosController.html.twig", 20)->display($context);
+        $this->loadTemplate("componentes/modal.html.twig", "AsignacionUsuariosController.html.twig", 20)->display(twig_array_merge($context, ["roles" => twig_get_attribute($this->env, $this->source, ($context["fsc"] ?? null), "roles", [], "any", false, false, false, 20)]));
         // line 21
         echo "
 <script>
@@ -126,7 +126,7 @@ class __TwigTemplate_5d7fede2feca483b740a3b102e922f396331c829578c6d75d8aba3475fa
     </div>
   </div>
 </div>
-{% include 'componentes/modal.html.twig' %}
+{% include 'componentes/modal.html.twig' with { 'roles': fsc.roles } %}
 
 <script>
   \$(document).ready(function() {

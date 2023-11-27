@@ -17,7 +17,7 @@
     </div>
   </div>
 </div>
-{% include 'componentes/modal.html.twig' %}
+{% include 'componentes/modal.html.twig' with { 'roles': fsc.roles } %}
 
 <script>
   $(document).ready(function() {
