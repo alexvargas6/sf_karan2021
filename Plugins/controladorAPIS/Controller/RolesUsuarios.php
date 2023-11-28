@@ -32,9 +32,11 @@ class RolesUsuarios extends Controller
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $dataBase = new DataBase();
             $sql =
-                'SELECT * FROM roles_users ru INNER JOIN roles r ON r.codrole = ru.codrole WHERE ru.nick = :nick';
+                'SELECT * FROM roles_users ru INNER JOIN roles r ON r.codrole = ru.codrole WHERE ru.nick = ' .
+                $dataBase->var2str($nick);
+
             $params = ['nick' => $nick];
-            error_log('Parámetros:' . json_encode($params));
+
             $data = $dataBase->select($sql, $params);
 
             if (empty($data)) {
@@ -51,3 +53,45 @@ class RolesUsuarios extends Controller
         return $response;
     }
 }
+/*public function privateCore(&$response, $user, $permissions)
+{
+    parent::privateCore($response, $user, $permissions);
+    $this->setTemplate(false); // Evita la búsqueda de la plantilla twig
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $nick = isset($_POST['nick']) ? $_POST['nick'] : false;
+        $role = isset($_POST['role']) ? $_POST['role'] : false;
+
+        if (!$nick || !$role) {
+            $response->setContent(
+                json_encode([
+                    'error' => 'Se requieren los campos nick y role.'
+                ])
+            );
+            return $response;
+        }
+
+        $roleUser = new RoleUser();
+        $roleUser->nick = $nick;
+        $roleUser->codrole = $role;
+
+        if ($roleUser->save()) {
+            $response->setContent(
+                json_encode([
+                    'success' => "Se ha asignado el usuario al rol correctamente."
+                ])
+            );
+        } else {
+            $response->setContent(
+                json_encode([
+                    'error' => "No se ha podido asignar el usuario al rol."
+                ])
+            );
+        }
+    } else {
+        // El código original para el GET request
+    }
+
+    return $response;
+}
+*/
