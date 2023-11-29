@@ -18,60 +18,90 @@ class InsertRolesUsuarios extends Controller
     {
         parent::privateCore($response, $user, $permissions);
         $this->setTemplate(false); // Evita la búsqueda de la plantilla twig
+        try {
+            // Iniciar una transacción
+            $this->dataBase->beginTransaction();
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $nick = isset($_POST['nick']) ? $_POST['nick'] : false;
+                //$role = isset($_POST['role']) ? $_POST['role'] : false;
+                // Convertimos los roles a array para poder trabajar con ellos
+                $rolesActuales = isset($_POST['rolesActuales'])
+                    ? explode(',', $_POST['rolesActuales'])
+                    : [];
+                $rolesNuevos = isset($_POST['rolesNuevos'])
+                    ? explode(',', $_POST['rolesNuevos'])
+                    : [];
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $nick = isset($_POST['nick']) ? $_POST['nick'] : false;
-            $role = isset($_POST['role']) ? $_POST['role'] : false;
+                // Filtramos los roles nuevos para quedarnos solo con los que no estén en los roles actuales
+                $rolesParaInsertar = array_diff($rolesNuevos, $rolesActuales);
+                $rolesParaEliminar = array_diff($rolesActuales, $rolesNuevos);
+                // Verificar si ambos arrays están vacíos
+                if (empty($rolesParaInsertar) && empty($rolesParaEliminar)) {
+                    throw new \Exception(
+                        'No se ha hecho ninguna modificación.'
+                    );
+                }
+                if (!empty($rolesParaInsertar)) {
+                    foreach ($rolesParaInsertar as $role) {
+                        $roleUser = new RoleUser();
+                        $roleUser->nick = $nick;
+                        $roleUser->codrole = $role;
 
-            if (!$nick || !$role) {
-                $response->setContent(
-                    json_encode([
-                        'error' => 'Se requieren los campos nick y role.',
-                    ])
-                );
-                return $response;
-            }
-            // Busca si ya existe un registro con los mismos valores
-            $where = [
-                new DataBaseWhere('nick', $nick),
-                new DataBaseWhere('codrole', $role),
-            ];
-            if (RoleUser::count($where) > 0) {
-                $response->setContent(
-                    json_encode([
-                        'error' =>
-                            'Ya existe un registro con el mismo nick y role.',
-                    ])
-                );
-                return $response;
-            }
+                        if (!$roleUser->save()) {
+                            throw new \Exception(
+                                'No se ha podido asignar el role ' .
+                                    $role .
+                                    ' al usuario.'
+                            );
+                        }
+                    }
+                }
 
-            $roleUser = new RoleUser();
-            $roleUser->nick = $nick;
-            $roleUser->codrole = $role;
+                // Recorremos la lista de roles para insertar y los guardamos en la base de datos
 
-            if ($roleUser->save()) {
+                if (!empty($rolesParaEliminar)) {
+                    foreach ($rolesParaEliminar as $role) {
+                        // Crear una instancia del modelo
+                        $roleUser = new RoleUser();
+
+                        // Crea una condición para encontrar el role para eliminar
+                        $where = [
+                            new DataBaseWhere('codrole', $role),
+                            new DataBaseWhere('nick', $nick),
+                        ];
+
+                        // Carga el registro del usuario
+                        if ($roleUser->loadFromCode('', $where)) {
+                            // Luego intenta eliminar el registro del modelo
+                            if (!$roleUser->delete()) {
+                                throw new \Exception(
+                                    'No se ha podido quitar el role ' .
+                                        $role .
+                                        ' del usuario.'
+                                );
+                            }
+                        }
+                    }
+                }
+
+                // Si todo ha ido bien, enviamos una respuesta de éxito
                 $response->setContent(
                     json_encode([
                         'success' =>
-                            'Se ha asignado el usuario al rol correctamente.',
+                            'Se han modificado correctamente los permisos del usuario.',
                     ])
                 );
             } else {
-                $response->setContent(
-                    json_encode([
-                        'error' => 'No se ha podido asignar el usuario al rol.',
-                    ])
+                throw new \Exception(
+                    'Este método solo admite solicitudes POST.'
                 );
             }
-        } else {
-            $response->setContent(
-                json_encode([
-                    'error' => 'Este método solo admite solicitudes POST.',
-                ])
-            );
-
-            return $response;
+            // Si todas las operaciones fueron exitosas, se confirma la transacción
+            $this->dataBase->commit();
+        } catch (\Exception $e) {
+            // Si alguna operación falla, se deshace la transacción
+            $this->dataBase->rollback();
+            $response->setContent(json_encode(['error' => $e->getMessage()]));
         }
 
         return $response;

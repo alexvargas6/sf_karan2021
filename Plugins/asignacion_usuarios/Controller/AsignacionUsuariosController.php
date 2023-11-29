@@ -4,6 +4,7 @@ namespace FacturaScripts\Plugins\asignacion_usuarios\Controller;
 use FacturaScripts\Core\Base\Controller;
 use FacturaScripts\Core\Model\User;
 use FacturaScripts\Core\Model\Role;
+use FacturaScripts\Core\Base\DataBase\DataBaseWhere;
 
 class AsignacionUsuariosController extends Controller
 {
@@ -23,7 +24,8 @@ class AsignacionUsuariosController extends Controller
     {
         parent::privateCore($response, $user, $permissions);
         $userModel = new User(); // creamos instancia del modelo User
-        $this->users = $userModel->all(); // cargamos todos los usuarios en la propiedad users.
+        $where = [new DataBaseWhere('admin', false)];
+        $this->users = $userModel->all($where);
 
         $roleModel = new Role(); // creamos instancia del modelo Role
         $this->roles = $roleModel->all(); // cargamos todos los roles en la propiedad roles.

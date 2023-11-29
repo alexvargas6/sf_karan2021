@@ -1,10 +1,16 @@
 // Manejar el evento de abrir el modal.
-$("#permisosModal").on("shown.bs.modal", function (event) {
+$("tbody").on("click", ".botonTabla", function () {
   // Obtenemos el botón que disparó el modal
-  var button = $(event.relatedTarget);
-
+  var ml = "Asignar/Quitar Permisos | ";
+  var button = $(this);
+  $("#nick").val("");
   // Obtenemos el nick del usuario a través del atributo data-nick
   var nick = button.data("nick");
+  $("#nick").val(nick);
+
+  // Lo establecemos en la etiqueta del modal
+  $("#permisosModalLabel").text(ml + nick);
+
   var baseUrl = window.location.origin;
   // Llamar a la función AJAX que devuelve los roles de usuario
   $.ajax({
@@ -18,7 +24,10 @@ $("#permisosModal").on("shown.bs.modal", function (event) {
     },
     success: function (data) {
       // Limpiar el permisosBox
+      $("#rolesActuales").val("");
+
       $("#permisosBox").empty();
+
       var dataArray = JSON.parse(data); // Convertir la cadena de texto a un array
       var permisosUsuario = dataArray.map(function (role) {
         return role.codrole;
@@ -51,6 +60,10 @@ $("#permisosModal").on("shown.bs.modal", function (event) {
             ' <i class="fas fa-times ml-1 eliminar-permiso"></i></span>'
         );
       });
+      // Convertir permisosUsuario a string y asignar su valor al input hidden
+      $("#rolesActuales").val(permisosUsuario.join(","));
+      // Abre el modal ahora
+      $("#permisosModal").modal("show");
     },
     error: function (error) {
       console.log("Hubo un error al obtener los roles: ", error);

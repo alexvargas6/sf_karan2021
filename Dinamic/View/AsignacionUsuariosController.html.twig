@@ -1,27 +1,30 @@
-{% extends "Master/MenuBghTemplate.html.twig" %}
-{% block head %}
-  {{ parent() }}
-  <!-- Etiqueta para cargar jQuery -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{% extends "Master/MenuBghTemplate.html.twig" %} {% block head %}
+{{ parent() }}
+<!-- Etiqueta para cargar jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-  <!-- Etiqueta para cargar DataTables -->
-  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
-{% endblock %}
-{% block body %}
+<!-- Etiqueta para cargar DataTables -->
+<script
+  type="text/javascript"
+  charset="utf8"
+  src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"
+></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+{% endblock %} {% block body %}
 <div class="container-fluid">
   <div class="row">
     <div class="col-sm-12">
-      {# Definimos los usuarios directamente en el código #}
-      {# Incluimos el componente de la tabla Bootstrap y pasamos la lista de usuarios #}
-      {% include 'componentes/tabla.html.twig' with { 'usuarios': fsc.users } %}
+      {# Definimos los usuarios directamente en el código #} {# Incluimos el
+      componente de la tabla Bootstrap y pasamos la lista de usuarios #} {%
+      include 'componentes/tabla.html.twig' with { 'usuarios': fsc.users } %}
     </div>
   </div>
 </div>
 {% include 'componentes/modal.html.twig' with { 'roles': fsc.roles } %}
 
 <script>
-  $(document).ready(function() {
-    $('#tablaUsuarios').DataTable(); // Inicializa la DataTable
+  $(document).ready(function () {
+    $("#tablaUsuarios").DataTable(); // Inicializa la DataTable
   });
 </script>
 {% endblock %}

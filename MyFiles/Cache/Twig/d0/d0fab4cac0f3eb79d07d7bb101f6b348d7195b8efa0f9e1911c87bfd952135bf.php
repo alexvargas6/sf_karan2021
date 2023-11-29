@@ -79,10 +79,9 @@ class __TwigTemplate_3e5fe6b933dc4c483f5a61e77a52d6ca4d93a8f187ce93b5108c96f1422
             echo "</td>
           <!-- Mostramos el nick del usuario -->
           <td>
-            <button class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#permisosModal\"
-            data-nick=\"";
-            // line 24
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["usuario"], "nick", [], "any", false, false, false, 24), "html", null, true);
+            <button class=\"btn btn-primary botonTabla\" data-nick=\"";
+            // line 23
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["usuario"], "nick", [], "any", false, false, false, 23), "html", null, true);
             echo "\">Asignar o quitar</button>
             <!-- Botón para Asignar -->
             <!-- Puedes añadir lógica aquí para asignar permisos -->
@@ -101,7 +100,7 @@ class __TwigTemplate_3e5fe6b933dc4c483f5a61e77a52d6ca4d93a8f187ce93b5108c96f1422
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['usuario'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 30
+        // line 29
         echo "      </tbody>
     </table>
   </div>
@@ -121,7 +120,7 @@ class __TwigTemplate_3e5fe6b933dc4c483f5a61e77a52d6ca4d93a8f187ce93b5108c96f1422
 
     public function getDebugInfo()
     {
-        return array (  105 => 30,  85 => 24,  78 => 20,  73 => 18,  70 => 17,  53 => 16,  37 => 2,);
+        return array (  104 => 29,  84 => 23,  78 => 20,  73 => 18,  70 => 17,  53 => 16,  37 => 2,);
     }
 
     public function getSourceContext()
@@ -148,8 +147,7 @@ class __TwigTemplate_3e5fe6b933dc4c483f5a61e77a52d6ca4d93a8f187ce93b5108c96f1422
           <td>{{ usuario.nick }}</td>
           <!-- Mostramos el nick del usuario -->
           <td>
-            <button class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#permisosModal\"
-            data-nick=\"{{ usuario.nick }}\">Asignar o quitar</button>
+            <button class=\"btn btn-primary botonTabla\" data-nick=\"{{ usuario.nick }}\">Asignar o quitar</button>
             <!-- Botón para Asignar -->
             <!-- Puedes añadir lógica aquí para asignar permisos -->
           </td>
