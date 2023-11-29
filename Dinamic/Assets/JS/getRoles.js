@@ -1,5 +1,5 @@
 // Manejar el evento de abrir el modal.
-$(".btn.btn-primary").click(function () {
+$("tbody").on("click", ".botonTabla", function () {
   // Obtenemos el botón que disparó el modal
   var ml = "Asignar/Quitar Permisos | ";
   var button = $(this);

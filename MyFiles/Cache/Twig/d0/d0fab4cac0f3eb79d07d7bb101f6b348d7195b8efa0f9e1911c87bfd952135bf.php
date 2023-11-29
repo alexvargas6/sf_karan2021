@@ -37,7 +37,7 @@ class __TwigTemplate_3e5fe6b933dc4c483f5a61e77a52d6ca4d93a8f187ce93b5108c96f1422
         echo "<div class=\"card\">
   <div class=\"card-header\">Asignación de Usuarios</div>
   <div class=\"card-body\">
-    <table id=\"tablaUsuarios\" class=\"table table-bordered\">
+    <table id=\"tablaUsuarios\" class=\"table table-bordered dataTable\">
       <thead>
         <tr>
           <th scope=\"col\">#</th>
@@ -125,11 +125,11 @@ class __TwigTemplate_3e5fe6b933dc4c483f5a61e77a52d6ca4d93a8f187ce93b5108c96f1422
 
     public function getSourceContext()
     {
-        return new Source("{# components/tabla_bootstrap.html.twig #}
+        return new Source("{# components/tabla.html.twig #}
 <div class=\"card\">
   <div class=\"card-header\">Asignación de Usuarios</div>
   <div class=\"card-body\">
-    <table id=\"tablaUsuarios\" class=\"table table-bordered\">
+    <table id=\"tablaUsuarios\" class=\"table table-bordered dataTable\">
       <thead>
         <tr>
           <th scope=\"col\">#</th>

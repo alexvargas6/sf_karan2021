@@ -49,47 +49,62 @@ class __TwigTemplate_5d7fede2feca483b740a3b102e922f396331c829578c6d75d8aba3475fa
         // line 2
         $this->displayParentBlock("head", $context, $blocks);
         echo "
-<!-- Etiqueta para cargar jQuery -->
-<script src=\"https://code.jquery.com/jquery-3.6.0.min.js\"></script>
-
-<!-- Etiqueta para cargar DataTables -->
-<script
-  type=\"text/javascript\"
-  charset=\"utf8\"
-  src=\"https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js\"
-></script>
+<link
+  rel=\"stylesheet\"
+  href=\"";
+        // line 5
+        echo twig_escape_filter($this->env, $this->env->getFunction('asset')->getCallable()("Plugins/asignacion_usuarios/Assets/DataTables/datatables.css"), "html", null, true);
+        // line 7
+        echo "\"
+/>
 ";
     }
 
-    // line 12
+    // line 9
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
-        // line 13
+        // line 10
         echo "<div class=\"container-fluid\">
   <div class=\"row\">
     <div class=\"col-sm-12\">
       ";
+        // line 13
+        echo " ";
+        // line 14
+        echo " ";
+        // line 15
+        $this->loadTemplate("componentes/tabla.html.twig", "AsignacionUsuariosController.html.twig", 15)->display(twig_array_merge($context, ["usuarios" => twig_get_attribute($this->env, $this->source, ($context["fsc"] ?? null), "users", [], "any", false, false, false, 15)]));
         // line 16
-        echo " ";
-        // line 17
-        echo " ";
-        // line 18
-        $this->loadTemplate("componentes/tabla.html.twig", "AsignacionUsuariosController.html.twig", 18)->display(twig_array_merge($context, ["usuarios" => twig_get_attribute($this->env, $this->source, ($context["fsc"] ?? null), "users", [], "any", false, false, false, 18)]));
-        // line 19
         echo "    </div>
   </div>
 </div>
 ";
-        // line 22
-        $this->loadTemplate("componentes/modal.html.twig", "AsignacionUsuariosController.html.twig", 22)->display(twig_array_merge($context, ["roles" => twig_get_attribute($this->env, $this->source, ($context["fsc"] ?? null), "roles", [], "any", false, false, false, 22)]));
-        // line 23
+        // line 19
+        $this->loadTemplate("componentes/modal.html.twig", "AsignacionUsuariosController.html.twig", 19)->display(twig_array_merge($context, ["roles" => twig_get_attribute($this->env, $this->source, ($context["fsc"] ?? null), "roles", [], "any", false, false, false, 19)]));
+        // line 20
         echo "<script src=\"https://cdn.jsdelivr.net/npm/sweetalert2@10\"></script>
-<script>
-  \$(document).ready(function () {
-    \$(\"#tablaUsuarios\").DataTable(); // Inicializa la DataTable
-  });
-</script>
+<script src=\"";
+        // line 21
+        echo twig_escape_filter($this->env, $this->env->getFunction('asset')->getCallable()("Plugins/asignacion_usuarios/Assets/DataTables/datatables.js"), "html", null, true);
+        // line 23
+        echo "\"></script>
+<script src=\"";
+        // line 24
+        echo twig_escape_filter($this->env, $this->env->getFunction('asset')->getCallable()("Plugins/asignacion_usuarios/Assets/JS/dom.js"), "html", null, true);
+        // line 26
+        echo "\"></script>
+<script src=\"";
+        // line 27
+        echo twig_escape_filter($this->env, $this->env->getFunction('asset')->getCallable()("Plugins/asignacion_usuarios/Assets/JS/getRoles.js"), "html", null, true);
+        // line 29
+        echo "\"></script>
+<script src=\"";
+        // line 30
+        echo twig_escape_filter($this->env, $this->env->getFunction('asset')->getCallable()("Plugins/asignacion_usuarios/Assets/JS/insertUs.js"), "html", null, true);
+        // line 32
+        echo "\"></script>
+
 ";
     }
 
@@ -105,22 +120,19 @@ class __TwigTemplate_5d7fede2feca483b740a3b102e922f396331c829578c6d75d8aba3475fa
 
     public function getDebugInfo()
     {
-        return array (  87 => 23,  85 => 22,  80 => 19,  78 => 18,  76 => 17,  74 => 16,  69 => 13,  65 => 12,  50 => 2,  36 => 1,);
+        return array (  106 => 32,  104 => 30,  101 => 29,  99 => 27,  96 => 26,  94 => 24,  91 => 23,  89 => 21,  86 => 20,  84 => 19,  79 => 16,  77 => 15,  75 => 14,  73 => 13,  68 => 10,  64 => 9,  58 => 7,  56 => 5,  50 => 2,  36 => 1,);
     }
 
     public function getSourceContext()
     {
         return new Source("{% extends \"Master/MenuBghTemplate.html.twig\" %} {% block head %}
 {{ parent() }}
-<!-- Etiqueta para cargar jQuery -->
-<script src=\"https://code.jquery.com/jquery-3.6.0.min.js\"></script>
-
-<!-- Etiqueta para cargar DataTables -->
-<script
-  type=\"text/javascript\"
-  charset=\"utf8\"
-  src=\"https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js\"
-></script>
+<link
+  rel=\"stylesheet\"
+  href=\"{{
+    asset('Plugins/asignacion_usuarios/Assets/DataTables/datatables.css')
+  }}\"
+/>
 {% endblock %} {% block body %}
 <div class=\"container-fluid\">
   <div class=\"row\">
@@ -133,11 +145,19 @@ class __TwigTemplate_5d7fede2feca483b740a3b102e922f396331c829578c6d75d8aba3475fa
 </div>
 {% include 'componentes/modal.html.twig' with { 'roles': fsc.roles } %}
 <script src=\"https://cdn.jsdelivr.net/npm/sweetalert2@10\"></script>
-<script>
-  \$(document).ready(function () {
-    \$(\"#tablaUsuarios\").DataTable(); // Inicializa la DataTable
-  });
-</script>
+<script src=\"{{
+    asset('Plugins/asignacion_usuarios/Assets/DataTables/datatables.js')
+  }}\"></script>
+<script src=\"{{
+    asset('Plugins/asignacion_usuarios/Assets/JS/dom.js')
+  }}\"></script>
+<script src=\"{{
+    asset('Plugins/asignacion_usuarios/Assets/JS/getRoles.js')
+  }}\"></script>
+<script src=\"{{
+    asset('Plugins/asignacion_usuarios/Assets/JS/insertUs.js')
+  }}\"></script>
+
 {% endblock %}
 ", "AsignacionUsuariosController.html.twig", "C:\\xampp\\htdocs\\sistema2\\Plugins\\asignacion_usuarios\\View\\AsignacionUsuariosController.html.twig");
     }
