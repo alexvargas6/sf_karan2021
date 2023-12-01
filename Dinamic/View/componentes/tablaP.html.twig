@@ -1,21 +1,15 @@
 {# components/tabla.html.twig #}
-
-<div class="card">
-  <div class="card-header">    <button id="agregarPermisoBtn" class="btn btn-primary btn-sm mb-3"  data-toggle="modal" data-target="#modalRoles">Agregar permiso</button> {# Agregamos un margen inferior al botón #}
-  </div>
-</div>
-
 <div class="card">
   <div class="card-header">Asignación de Permisos</div>
   
   <div class="card-body">
-    <table id="tablaDRoles" class="table table-bordered dataTable">
+    <button id="agregarPermisoBtn" class="btn btn-primary btn-sm mb-3"  data-toggle="modal" data-target="#modalRoles">Agregar permiso</button> {# Agregamos un margen inferior al botón #}
+    <table id="" class="table table-bordered dataTable">
       <thead>
         <tr>
           <th scope="col">#</th>
           <th scope="col">ROL</th>
           <th scope="col">Descripcion</th>
-          <th scope="col">Accesos</th> {# Nueva columna para las acciones #}
           <th scope="col">Acciones</th> {# Nueva columna para las acciones #}
         </tr>
         </tr>
@@ -27,9 +21,6 @@
           <th>{{ role.codrole }}</th>
           <th>{{ role.descripcion }}</th>
           <th>
-            <button type="button" class="btn btn-primary btn-sm">Accesos</button> {# Nuevo botón de Accesos #}
-          </th>
-          <th>  
             <button type="button" class="btn btn-danger btn-sm">Eliminar</button> {# Nuevo botón de eliminar #}
           </th>
         </tr>

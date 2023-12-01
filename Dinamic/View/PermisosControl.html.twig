@@ -1,5 +1,4 @@
-{% extends "Master/MenuBghTemplate.html.twig" %}
-{% block head %}
+{% extends "Master/MenuBghTemplate.html.twig" %} {% block head %}
 {{ parent() }}
 <link
   rel="stylesheet"
@@ -7,14 +6,37 @@
     asset('Plugins/control_permisos/Assets/DataTables/datatables.css')
   }}"
 />
-{% endblock %}
-{% block body %}
+{% endblock %} {% block body %}
 <div class="container-fluid">
-    <div class="row">
-      <div class="col-sm-12">
-        {%
-            include 'componentes/tabla.html.twig' with { 'usuarios': fsc.roles }%}
-      </div>
+  <div class="row">
+    <div class="col-sm-12">
+      {% include 'componentes/tablaP.html.twig' with { 'usuarios': fsc.roles }%}
+      {% include 'componentes/modalP.html.twig'%}
     </div>
+  </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="{{
+    asset('Plugins/control_permisos/Assets/JS/insertarRol.js')
+  }}"></script>
+<script>
+  $("#formularioRoles").on("submit", function (e) {
+    e.preventDefault();  
+    insertRol();
+  });
+ 
+  // Llamar a la función limpiarModal al cerrar el modal usando jQuery (Bootstrap)
+  $("#modalRoles").on("hidden.bs.modal", function (e) {
+    limpiarModal();
+  });
+  function limpiarModal() {
+    // Obtener referencia a los campos del formulario dentro del modal
+    let codigoRolInput = document.getElementById("codrole");
+    let descripcionInput = document.getElementById("descripcion");
+
+    // Limpiar los valores de los campos del formulario
+    codigoRolInput.value = "";
+    descripcionInput.value = "";
+  }
+</script>
 {% endblock %}

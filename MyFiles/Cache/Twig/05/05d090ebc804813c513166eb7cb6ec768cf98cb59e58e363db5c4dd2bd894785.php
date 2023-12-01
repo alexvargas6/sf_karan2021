@@ -34,28 +34,35 @@ class __TwigTemplate_e4425e474d67e40af45974ebd1c3c82fefae2917534cb6895ef4065c262
     {
         $macros = $this->macros;
         // line 2
-        echo "<div class=\"card\">
+        echo "
+<div class=\"card\">
+  <div class=\"card-header\">    <button id=\"agregarPermisoBtn\" class=\"btn btn-primary btn-sm mb-3\"  data-toggle=\"modal\" data-target=\"#modalRoles\">Agregar permiso</button> ";
+        // line 5
+        echo "  </div>
+</div>
+
+<div class=\"card\">
   <div class=\"card-header\">Asignación de Permisos</div>
   
   <div class=\"card-body\">
-    <button id=\"agregarPermisoBtn\" class=\"btn btn-primary btn-sm mb-3\">Agregar permiso</button> ";
-        // line 7
-        echo "    <table id=\"\" class=\"table table-bordered dataTable\">
+    <table id=\"tablaDRoles\" class=\"table table-bordered dataTable\">
       <thead>
         <tr>
           <th scope=\"col\">#</th>
           <th scope=\"col\">ROL</th>
           <th scope=\"col\">Descripcion</th>
-          <th scope=\"col\">Acciones</th> ";
-        // line 14
+          <th scope=\"col\">Accesos</th> ";
+        // line 19
+        echo "          <th scope=\"col\">Acciones</th> ";
+        // line 20
         echo "        </tr>
         </tr>
       </thead>
       <tbody>
         ";
-        // line 18
+        // line 24
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, ($context["fsc"] ?? null), "roles", [], "any", false, false, false, 18));
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, ($context["fsc"] ?? null), "roles", [], "any", false, false, false, 24));
         $context['loop'] = [
           'parent' => $context['_parent'],
           'index0' => 0,
@@ -70,23 +77,27 @@ class __TwigTemplate_e4425e474d67e40af45974ebd1c3c82fefae2917534cb6895ef4065c262
             $context['loop']['last'] = 1 === $length;
         }
         foreach ($context['_seq'] as $context["_key"] => $context["role"]) {
-            // line 19
+            // line 25
             echo "        <tr>
           <th scope=\"row\">";
-            // line 20
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["loop"], "index", [], "any", false, false, false, 20), "html", null, true);
+            // line 26
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["loop"], "index", [], "any", false, false, false, 26), "html", null, true);
             echo "</th>
           <th>";
-            // line 21
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["role"], "codrole", [], "any", false, false, false, 21), "html", null, true);
+            // line 27
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["role"], "codrole", [], "any", false, false, false, 27), "html", null, true);
             echo "</th>
           <th>";
-            // line 22
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["role"], "descripcion", [], "any", false, false, false, 22), "html", null, true);
+            // line 28
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["role"], "descripcion", [], "any", false, false, false, 28), "html", null, true);
             echo "</th>
           <th>
+            <button type=\"button\" class=\"btn btn-primary btn-sm\">Accesos</button> ";
+            // line 31
+            echo "          </th>
+          <th>  
             <button type=\"button\" class=\"btn btn-danger btn-sm\">Eliminar</button> ";
-            // line 25
+            // line 34
             echo "          </th>
         </tr>
         ";
@@ -102,7 +113,7 @@ class __TwigTemplate_e4425e474d67e40af45974ebd1c3c82fefae2917534cb6895ef4065c262
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['role'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 28
+        // line 37
         echo "      </tbody>
     </table>
   </div>
@@ -122,23 +133,29 @@ class __TwigTemplate_e4425e474d67e40af45974ebd1c3c82fefae2917534cb6895ef4065c262
 
     public function getDebugInfo()
     {
-        return array (  106 => 28,  90 => 25,  85 => 22,  81 => 21,  77 => 20,  74 => 19,  57 => 18,  51 => 14,  43 => 7,  37 => 2,);
+        return array (  117 => 37,  101 => 34,  97 => 31,  92 => 28,  88 => 27,  84 => 26,  81 => 25,  64 => 24,  58 => 20,  56 => 19,  41 => 5,  37 => 2,);
     }
 
     public function getSourceContext()
     {
         return new Source("{# components/tabla.html.twig #}
+
+<div class=\"card\">
+  <div class=\"card-header\">    <button id=\"agregarPermisoBtn\" class=\"btn btn-primary btn-sm mb-3\"  data-toggle=\"modal\" data-target=\"#modalRoles\">Agregar permiso</button> {# Agregamos un margen inferior al botón #}
+  </div>
+</div>
+
 <div class=\"card\">
   <div class=\"card-header\">Asignación de Permisos</div>
   
   <div class=\"card-body\">
-    <button id=\"agregarPermisoBtn\" class=\"btn btn-primary btn-sm mb-3\">Agregar permiso</button> {# Agregamos un margen inferior al botón #}
-    <table id=\"\" class=\"table table-bordered dataTable\">
+    <table id=\"tablaDRoles\" class=\"table table-bordered dataTable\">
       <thead>
         <tr>
           <th scope=\"col\">#</th>
           <th scope=\"col\">ROL</th>
           <th scope=\"col\">Descripcion</th>
+          <th scope=\"col\">Accesos</th> {# Nueva columna para las acciones #}
           <th scope=\"col\">Acciones</th> {# Nueva columna para las acciones #}
         </tr>
         </tr>
@@ -150,6 +167,9 @@ class __TwigTemplate_e4425e474d67e40af45974ebd1c3c82fefae2917534cb6895ef4065c262
           <th>{{ role.codrole }}</th>
           <th>{{ role.descripcion }}</th>
           <th>
+            <button type=\"button\" class=\"btn btn-primary btn-sm\">Accesos</button> {# Nuevo botón de Accesos #}
+          </th>
+          <th>  
             <button type=\"button\" class=\"btn btn-danger btn-sm\">Eliminar</button> {# Nuevo botón de eliminar #}
           </th>
         </tr>

@@ -1,21 +1,29 @@
 {# components/tabla.html.twig #}
 <div class="card">
-  <div class="card-header">Asignación de Permisos</div>
+  <div class="card-header">Asignación de Usuarios</div>
   <div class="card-body">
-    <table id="" class="table table-bordered dataTable">
+    <table id="tablaUsuarios" class="table table-bordered dataTable">
       <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="col">ROL</th>
-          <th scope="col">Descripcion</th>
+
+          <th scope="col">Nick</th>
+          <!-- Agregamos nueva columna para el Nick -->
+          <th scope="col">Permisos</th>
         </tr>
       </thead>
       <tbody>
-        {% for role in fsc.roles %}
+        {% for usuario in usuarios %}
         <tr>
           <th scope="row">{{ loop.index }}</th>
-          <th>{{ role.codrole }}</th>
-          <th>{{ role.descripcion }}</th>
+
+          <td>{{ usuario.nick }}</td>
+          <!-- Mostramos el nick del usuario -->
+          <td>
+            <button class="btn btn-primary botonTabla" data-nick="{{ usuario.nick }}">Asignar o quitar</button>
+            <!-- Botón para Asignar -->
+            <!-- Puedes añadir lógica aquí para asignar permisos -->
+          </td>
         </tr>
         {% endfor %}
       </tbody>
