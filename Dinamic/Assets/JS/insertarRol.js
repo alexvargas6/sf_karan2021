@@ -40,11 +40,15 @@ function insertRol() {
         mensaje = obj.error;
       }
        $("#modalRoles").modal("hide"); // cierra el modal
-      Swal.fire(
-        encabezado,
-        mensaje, // Aquí mostramos el mensaje del response
-        tipo
-      );
+       Swal.fire({
+        title: encabezado,
+        text: mensaje,
+        icon: tipo,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.reload(); // Recarga la página después del OK
+        }
+      });
     },
     error: function (error) {
       console.error(error);

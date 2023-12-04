@@ -11,7 +11,8 @@
   <div class="row">
     <div class="col-sm-12">
       {% include 'componentes/tablaP.html.twig' with { 'usuarios': fsc.roles }%}
-      {% include 'componentes/modalP.html.twig'%}
+      {% include 'componentes/modalP.html.twig'%} {% include
+      'componentes/modalPaginas.html.twig'%}
     </div>
   </div>
 </div>
@@ -25,7 +26,77 @@
 
 <script>
   $(document).ready(function () {
+    $("#tableMPaginas").DataTable(); // Inicializa la DataTable
     $("#tablaDRoles").DataTable(); // Inicializa la DataTable
+
+    $(document).on("click", ".btn-primary", function () {
+      // Obtener el valor de codrole del botón clicado
+      var codrole = $(this).closest("tr").find("th:eq(1)").text();
+
+      // Asegurarse de que se recoge un valor de codrole
+      if (!codrole) {
+        Swal.fire(
+          "Error",
+          "No se ha podido obtener el valor de codrole",
+          "error"
+        );
+        return;
+      }
+
+      // Antes de realizar la petición, desmarcar todos los checkboxes
+      desmarcarCheckboxes();
+
+      var baseUrl = window.location.origin;
+      // URL para la petición AJAX
+      var url = baseUrl + "/sistema2/SelectUser_rol";
+
+      // Realizar petición GET a la API
+      $.get(url, { codrole: codrole })
+        .done(function (data) {
+          // Parsear la respuesta a JSON
+          var response = JSON.parse(data);
+
+          // Verificar si la respuesta contiene un error
+          if (response.error) {
+            Swal.fire("Error", response.error, "error");
+            return; // Salir para no ejecutar el código que sigue
+          }
+
+          // Manejar la respuesta del API para marcar los checkboxes
+          response.forEach(function (item) {
+            var pagename = item.pagename;
+            var allowdelete = item.allowdelete;
+
+            // Buscar la fila correspondiente en la tabla por pagename
+            var $row = $("#tableMPaginas tbody tr").filter(function () {
+              return $(this).find("td:eq(7)").text() === pagename;
+            });
+
+            // Marcar los checkboxes correspondientes en esa fila
+            $row.find("td:eq(1) input").prop("checked", allowdelete);
+            // Y así sucesivamente para los otros checkboxes
+          });
+
+          // Mostrar el modal después de marcar los checkboxes
+          $("#modalPagina").modal("show");
+        })
+        .fail(function (jqXHR, textStatus, errorThrown) {
+          console.error(
+            "Error al obtener datos: ",
+            textStatus,
+            ", Detalles: ",
+            errorThrown
+          );
+          console.error("Respuesta: ", jqXHR.responseText);
+          // Mostrar mensaje de error
+          Swal.fire(
+            "Error",
+            "Hubo un problema con la petición: " + textStatus,
+            "error"
+          );
+        });
+    });
+
     $(document).on("click", ".access-button", function () {
       var codrole = $(this).attr("data-role"); // Captura el codrole del botón
       Swal.fire({
@@ -79,6 +150,12 @@
   $("#modalRoles").on("hidden.bs.modal", function (e) {
     limpiarModal();
   });
+  function desmarcarCheckboxes() {
+    $("#tableMPaginas tbody tr td input[type='checkbox']").prop(
+      "checked",
+      false
+    );
+  }
   function limpiarModal() {
     // Obtener referencia a los campos del formulario dentro del modal
     let codigoRolInput = document.getElementById("codrole");

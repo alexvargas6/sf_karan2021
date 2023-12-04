@@ -3,10 +3,12 @@ namespace FacturaScripts\Plugins\control_permisos\Controller;
 
 use FacturaScripts\Core\Base\Controller;
 use FacturaScripts\Core\Model\RoleUser;
+use FacturaScripts\Core\Model\Page;
 use FacturaScripts\Core\Model\Role;
 class PermisosControl extends Controller
 {
     public $roles;
+    public $pages;
 
     public function getPageData(): array
     {
@@ -25,7 +27,14 @@ class PermisosControl extends Controller
 
         $roleModel = new Role();
         $this->roles = $roleModel->all(); // Traerá todos los datos de la tabla roles
-
+        $pageModel = new Page();
+        $this->pages = [];
+        foreach ($pageModel->all() as $page) {
+            $page->title = $this->toolBox()
+                ->i18n()
+                ->trans($page->title);
+            $this->pages[] = $page;
+        }
         // Ahora los datos están disponibles para usar en la plantilla
     }
 }

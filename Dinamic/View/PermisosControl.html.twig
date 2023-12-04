@@ -11,7 +11,8 @@
   <div class="row">
     <div class="col-sm-12">
       {% include 'componentes/tablaP.html.twig' with { 'usuarios': fsc.roles }%}
-      {% include 'componentes/modalP.html.twig'%}
+      {% include 'componentes/modalP.html.twig'%} {% include
+      'componentes/modalPaginas.html.twig'%}
     </div>
   </div>
 </div>
@@ -22,10 +23,75 @@
 <script src="{{
     asset('Plugins/control_permisos/Assets/JS/insertarRol.js')
   }}"></script>
+
 <script>
   $(document).ready(function () {
+    $("#tableMPaginas").DataTable(); // Inicializa la DataTable
     $("#tablaDRoles").DataTable(); // Inicializa la DataTable
-    $(".access-button").click(function () {
+    // Detectar el click en los botones de Accesos
+    $(document).on("click", ".btn-primary", function () {
+      // Obtener el valor de codrole del botón clicado
+      var codrole = $(this).closest("tr").find("th:eq(1)").text();
+      // Asegurarse de que se recoge un valor de codrole
+      if (!codrole) {
+        Swal.fire(
+          "Error",
+          "No se ha podido obtener el valor de codrole",
+          "error"
+        );
+        return;
+      }
+      var baseUrl = window.location.origin;
+      // toma la url para la petición AJAX
+      var url = baseUrl + "/sistema2/SelectUser_rol";
+      // Realizar petición GET a la API
+      $.get(url, { codrole: codrole })
+        .done(function (data) {
+          // Parsear la respuesta a JSON
+          var response = JSON.parse(data);
+
+          // Verificar si la respuesta contiene un error
+          if (response.error) {
+            // Mostrar mensaje de error
+            Swal.fire("Error", response.error, "error");
+            return; // Salimos para no ejecutar el código que sigue
+          }
+          $("#modalPagina").modal("show");
+          // Si no hay errores logueamos la respuesta en la consola
+          console.log(response);
+
+          // Recorrer la respuesta
+          for (var i = 0; i < response.length; i++) {
+            // Recorrer cada fila de la tabla
+            $("#tableMPaginas tbody tr").each(function () {
+              // Si el nombre en la fila de la tabla concuerda con el pagename de la respuesta
+              if ($(this).find("td:eq(7)").text() == response[i].pagename) {
+                // Puedes hacer lo que necesites aquí, como activar los checkboxs según los permisos en la respuesta
+                $(this)
+                  .find("td:eq(1) input")
+                  .prop("checked", response[i].allowdelete);
+                // y así sucesivamente para los otros checkboxs
+              }
+            });
+          }
+        })
+        .fail(function (jqXHR, textStatus, errorThrown) {
+          console.error(
+            "Error al obtener datos: ",
+            textStatus,
+            ", Detalles: ",
+            errorThrown
+          );
+          console.error("Respuesta: ", jqXHR.responseText);
+          // Mostrar mensaje de error
+          Swal.fire(
+            "Error",
+            "Hubo un problema con la petición: " + textStatus,
+            "error"
+          );
+        });
+    });
+    $(document).on("click", ".access-button", function () {
       var codrole = $(this).attr("data-role"); // Captura el codrole del botón
       Swal.fire({
         title: "¿Estás seguro?",
@@ -48,6 +114,7 @@
               console.log(response);
               if (response.status == "success") {
                 Swal.fire("¡Eliminado!", response.message, "success");
+                window.location.reload(); // Recarga la página después del OK
               } else if (response.status == "error") {
                 Swal.fire("Error", response.message, "error");
               }
@@ -55,7 +122,10 @@
             error: function (jqXHR, textStatus, errorThrown) {
               Swal.fire(
                 "Error",
-                'Error al procesar la petición: ' + jqXHR.status + ' - ' + jqXHR.responseText,
+                "Error al procesar la petición: " +
+                  jqXHR.status +
+                  " - " +
+                  jqXHR.responseText,
                 "error"
               );
               //console.log(textStatus, errorThrown);

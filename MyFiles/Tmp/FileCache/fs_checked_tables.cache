@@ -1,1 +1,1 @@
-a:11:{i:0;s:8:"settings";i:1;s:5:"users";i:2;s:5:"pages";i:3;s:8:"empresas";i:4;s:5:"roles";i:5;s:12:"roles_access";i:6;s:11:"roles_users";i:7;s:13:"pages_options";i:8;s:13:"pages_filters";i:9;s:9:"almacenes";i:10;s:19:"formatos_documentos";}
+a:12:{i:0;s:8:"settings";i:1;s:5:"users";i:2;s:5:"pages";i:3;s:8:"empresas";i:4;s:5:"roles";i:5;s:12:"roles_access";i:6;s:13:"pages_options";i:7;s:13:"pages_filters";i:8;s:9:"almacenes";i:9;s:11:"roles_users";i:10;s:19:"formatos_documentos";i:11;s:4:"logs";}
