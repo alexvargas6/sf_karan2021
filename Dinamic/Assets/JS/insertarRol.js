@@ -30,16 +30,16 @@ function insertRol() {
       var encabezado = "";
       var tipo = "";
       console.log(obj);
-      if (obj.success) {
+      if (obj.status == "success") {
         encabezado = "¡Exitoso!";
         tipo = "success";
-        mensaje = obj.success;
+        mensaje = obj.message;
       } else {
         encabezado = "¡Error!";
         tipo = "error";
         mensaje = obj.error;
       }
-      // $("#modalRoles").modal("hide"); // cierra el modal
+       $("#modalRoles").modal("hide"); // cierra el modal
       Swal.fire(
         encabezado,
         mensaje, // Aquí mostramos el mensaje del response

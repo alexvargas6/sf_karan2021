@@ -27,10 +27,10 @@
           <th>{{ role.codrole }}</th>
           <th>{{ role.descripcion }}</th>
           <th>
-            <button type="button" class="btn btn-primary btn-sm">Accesos</button> {# Nuevo botón de Accesos #}
+            <button type="button"  class="btn btn-primary btn-sm">Accesos</button> {# Nuevo botón de Accesos #}
           </th>
           <th>  
-            <button type="button" class="btn btn-danger btn-sm">Eliminar</button> {# Nuevo botón de eliminar #}
+            <button type="button" data-role="{{ role.codrole }}" class="access-button btn btn-danger btn-sm">Eliminar</button> {# Nuevo botón de eliminar #}
           </th>
         </tr>
         {% endfor %}

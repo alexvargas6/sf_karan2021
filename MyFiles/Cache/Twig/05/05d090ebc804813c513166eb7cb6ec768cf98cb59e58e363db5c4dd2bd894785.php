@@ -92,11 +92,14 @@ class __TwigTemplate_e4425e474d67e40af45974ebd1c3c82fefae2917534cb6895ef4065c262
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["role"], "descripcion", [], "any", false, false, false, 28), "html", null, true);
             echo "</th>
           <th>
-            <button type=\"button\" class=\"btn btn-primary btn-sm\">Accesos</button> ";
+            <button type=\"button\"  class=\"btn btn-primary btn-sm\">Accesos</button> ";
             // line 31
             echo "          </th>
           <th>  
-            <button type=\"button\" class=\"btn btn-danger btn-sm\">Eliminar</button> ";
+            <button type=\"button\" data-role=\"";
+            // line 33
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["role"], "codrole", [], "any", false, false, false, 33), "html", null, true);
+            echo "\" class=\"access-button btn btn-danger btn-sm\">Eliminar</button> ";
             // line 34
             echo "          </th>
         </tr>
@@ -133,7 +136,7 @@ class __TwigTemplate_e4425e474d67e40af45974ebd1c3c82fefae2917534cb6895ef4065c262
 
     public function getDebugInfo()
     {
-        return array (  117 => 37,  101 => 34,  97 => 31,  92 => 28,  88 => 27,  84 => 26,  81 => 25,  64 => 24,  58 => 20,  56 => 19,  41 => 5,  37 => 2,);
+        return array (  120 => 37,  104 => 34,  101 => 33,  97 => 31,  92 => 28,  88 => 27,  84 => 26,  81 => 25,  64 => 24,  58 => 20,  56 => 19,  41 => 5,  37 => 2,);
     }
 
     public function getSourceContext()
@@ -167,10 +170,10 @@ class __TwigTemplate_e4425e474d67e40af45974ebd1c3c82fefae2917534cb6895ef4065c262
           <th>{{ role.codrole }}</th>
           <th>{{ role.descripcion }}</th>
           <th>
-            <button type=\"button\" class=\"btn btn-primary btn-sm\">Accesos</button> {# Nuevo botón de Accesos #}
+            <button type=\"button\"  class=\"btn btn-primary btn-sm\">Accesos</button> {# Nuevo botón de Accesos #}
           </th>
           <th>  
-            <button type=\"button\" class=\"btn btn-danger btn-sm\">Eliminar</button> {# Nuevo botón de eliminar #}
+            <button type=\"button\" data-role=\"{{ role.codrole }}\" class=\"access-button btn btn-danger btn-sm\">Eliminar</button> {# Nuevo botón de eliminar #}
           </th>
         </tr>
         {% endfor %}

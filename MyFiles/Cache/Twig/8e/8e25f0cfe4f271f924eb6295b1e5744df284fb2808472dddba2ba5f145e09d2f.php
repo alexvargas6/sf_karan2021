@@ -81,7 +81,7 @@ class __TwigTemplate_58d2d9b43b80a1eaeb87b6265a69cb53f177e4ebd694dec78cc37569bc8
 <script src=\"https://cdn.jsdelivr.net/npm/sweetalert2@10\"></script>
 <script src=\"";
         // line 19
-        echo twig_escape_filter($this->env, $this->env->getFunction('asset')->getCallable()("Plugins/asignacion_usuarios/Assets/DataTables/datatables.js"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getFunction('asset')->getCallable()("Plugins/control_permisos/Assets/DataTables/datatables.js"), "html", null, true);
         // line 21
         echo "\"></script>
 <script src=\"";
@@ -89,15 +89,55 @@ class __TwigTemplate_58d2d9b43b80a1eaeb87b6265a69cb53f177e4ebd694dec78cc37569bc8
         echo twig_escape_filter($this->env, $this->env->getFunction('asset')->getCallable()("Plugins/control_permisos/Assets/JS/insertarRol.js"), "html", null, true);
         // line 24
         echo "\"></script>
+  
 <script>
   \$(document).ready(function () {
     \$(\"#tablaDRoles\").DataTable(); // Inicializa la DataTable
+    \$(document).on('click', '.access-button', function () {
+      var codrole = \$(this).attr(\"data-role\"); // Captura el codrole del botón
+      Swal.fire({
+        title: \"¿Estás seguro?\",
+        text: \"¿Seguro que quieres eliminar este permiso?\",
+        icon: \"warning\",
+        showCancelButton: true,
+        confirmButtonColor: \"#3085d6\",
+        cancelButtonColor: \"#d33\",
+        confirmButtonText: \"Sí, bórralo!\",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          var baseUrl = window.location.origin;
+          // toma la url para la petición AJAX
+          const url = baseUrl + \"/sistema2/DeleteRole\";
+          \$.ajax({
+            url: url,
+            type: \"POST\",
+            data: { id: codrole },
+            success: function (response) {
+              console.log(response);
+              if (response.status == \"success\") {
+                Swal.fire(\"¡Eliminado!\", response.message, \"success\");
+              } else if (response.status == \"error\") {
+                Swal.fire(\"Error\", response.message, \"error\");
+              }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+              Swal.fire(
+                \"Error\",
+                'Error al procesar la petición: ' + jqXHR.status + ' - ' + jqXHR.responseText,
+                \"error\"
+              );
+              //console.log(textStatus, errorThrown);
+            },
+          });
+        }
+      });
+    });
   });
   \$(\"#formularioRoles\").on(\"submit\", function (e) {
-    e.preventDefault();  
+    e.preventDefault();
     insertRol();
   });
- 
+
   // Llamar a la función limpiarModal al cerrar el modal usando jQuery (Bootstrap)
   \$(\"#modalRoles\").on(\"hidden.bs.modal\", function (e) {
     limpiarModal();
@@ -151,20 +191,60 @@ class __TwigTemplate_58d2d9b43b80a1eaeb87b6265a69cb53f177e4ebd694dec78cc37569bc8
 </div>
 <script src=\"https://cdn.jsdelivr.net/npm/sweetalert2@10\"></script>
 <script src=\"{{
-    asset('Plugins/asignacion_usuarios/Assets/DataTables/datatables.js')
+    asset('Plugins/control_permisos/Assets/DataTables/datatables.js')
   }}\"></script>
 <script src=\"{{
     asset('Plugins/control_permisos/Assets/JS/insertarRol.js')
   }}\"></script>
+  
 <script>
   \$(document).ready(function () {
     \$(\"#tablaDRoles\").DataTable(); // Inicializa la DataTable
+    \$(document).on('click', '.access-button', function () {
+      var codrole = \$(this).attr(\"data-role\"); // Captura el codrole del botón
+      Swal.fire({
+        title: \"¿Estás seguro?\",
+        text: \"¿Seguro que quieres eliminar este permiso?\",
+        icon: \"warning\",
+        showCancelButton: true,
+        confirmButtonColor: \"#3085d6\",
+        cancelButtonColor: \"#d33\",
+        confirmButtonText: \"Sí, bórralo!\",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          var baseUrl = window.location.origin;
+          // toma la url para la petición AJAX
+          const url = baseUrl + \"/sistema2/DeleteRole\";
+          \$.ajax({
+            url: url,
+            type: \"POST\",
+            data: { id: codrole },
+            success: function (response) {
+              console.log(response);
+              if (response.status == \"success\") {
+                Swal.fire(\"¡Eliminado!\", response.message, \"success\");
+              } else if (response.status == \"error\") {
+                Swal.fire(\"Error\", response.message, \"error\");
+              }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+              Swal.fire(
+                \"Error\",
+                'Error al procesar la petición: ' + jqXHR.status + ' - ' + jqXHR.responseText,
+                \"error\"
+              );
+              //console.log(textStatus, errorThrown);
+            },
+          });
+        }
+      });
+    });
   });
   \$(\"#formularioRoles\").on(\"submit\", function (e) {
-    e.preventDefault();  
+    e.preventDefault();
     insertRol();
   });
- 
+
   // Llamar a la función limpiarModal al cerrar el modal usando jQuery (Bootstrap)
   \$(\"#modalRoles\").on(\"hidden.bs.modal\", function (e) {
     limpiarModal();
