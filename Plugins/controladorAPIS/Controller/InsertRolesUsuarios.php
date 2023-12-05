@@ -11,6 +11,7 @@ class InsertRolesUsuarios extends Controller
         $pagedata = parent::getPageData();
         $pagedata['title'] = 'InsertRolesUsuarios';
         $pagedata['menu'] = 'public';
+        $pagedata['showonmenu'] = false; // Esta es la opción que evitará que aparezca en el menú
         return $pagedata;
     }
 

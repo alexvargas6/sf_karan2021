@@ -36,7 +36,7 @@ class __TwigTemplate_e4425e474d67e40af45974ebd1c3c82fefae2917534cb6895ef4065c262
         // line 2
         echo "
 <div class=\"card\">
-  <div class=\"card-header\">    <button id=\"agregarPermisoBtn\" class=\"btn btn-primary btn-sm mb-3\"  data-toggle=\"modal\" data-target=\"#modalRoles\">Agregar permiso</button> ";
+  <div class=\"card-header\">    <button id=\"agregarPermisoBtn\" class=\"btn btn-info btn-sm mb-3\"  data-toggle=\"modal\" data-target=\"#modalRoles\">Agregar permiso</button> ";
         // line 5
         echo "  </div>
 </div>
@@ -144,7 +144,7 @@ class __TwigTemplate_e4425e474d67e40af45974ebd1c3c82fefae2917534cb6895ef4065c262
         return new Source("{# components/tabla.html.twig #}
 
 <div class=\"card\">
-  <div class=\"card-header\">    <button id=\"agregarPermisoBtn\" class=\"btn btn-primary btn-sm mb-3\"  data-toggle=\"modal\" data-target=\"#modalRoles\">Agregar permiso</button> {# Agregamos un margen inferior al botón #}
+  <div class=\"card-header\">    <button id=\"agregarPermisoBtn\" class=\"btn btn-info btn-sm mb-3\"  data-toggle=\"modal\" data-target=\"#modalRoles\">Agregar permiso</button> {# Agregamos un margen inferior al botón #}
   </div>
 </div>
 

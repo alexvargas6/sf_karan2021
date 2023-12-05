@@ -20,6 +20,18 @@ class PermisosControl extends Controller
         return $pagedata;
     }
 
+    /**
+     * List of all the pages.
+     *
+     * @return Page[]
+     */
+    protected function getAllPages(): array
+    {
+        $page = new Page();
+        $order = ['menu' => 'ASC', 'title' => 'ASC'];
+        return $page->all([], $order, 0, 0);
+    }
+
     public function privateCore(&$response, $user, $permissions): void
     {
         parent::privateCore($response, $user, $permissions);
@@ -29,10 +41,14 @@ class PermisosControl extends Controller
         $this->roles = $roleModel->all(); // Traerá todos los datos de la tabla roles
         $pageModel = new Page();
         $this->pages = [];
-        foreach ($pageModel->all() as $page) {
+
+        foreach ($this->getAllPages() as $page) {
             $page->title = $this->toolBox()
                 ->i18n()
                 ->trans($page->title);
+            $page->menu = $this->toolBox()
+                ->i18n()
+                ->trans($page->menu);
             $this->pages[] = $page;
         }
         // Ahora los datos están disponibles para usar en la plantilla

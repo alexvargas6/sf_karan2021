@@ -57,115 +57,65 @@ class __TwigTemplate_58d2d9b43b80a1eaeb87b6265a69cb53f177e4ebd694dec78cc37569bc8
         // line 7
         echo "\"
 />
+
 ";
     }
 
-    // line 9
+    // line 10
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
-        // line 10
+        // line 11
         echo "<div class=\"container-fluid\">
   <div class=\"row\">
     <div class=\"col-sm-12\">
       ";
-        // line 13
-        $this->loadTemplate("componentes/tablaP.html.twig", "PermisosControl.html.twig", 13)->display(twig_array_merge($context, ["usuarios" => twig_get_attribute($this->env, $this->source, ($context["fsc"] ?? null), "roles", [], "any", false, false, false, 13)]));
         // line 14
+        $this->loadTemplate("componentes/tablaP.html.twig", "PermisosControl.html.twig", 14)->display(twig_array_merge($context, ["usuarios" => twig_get_attribute($this->env, $this->source, ($context["fsc"] ?? null), "roles", [], "any", false, false, false, 14)]));
+        // line 15
         echo "      ";
-        $this->loadTemplate("componentes/modalP.html.twig", "PermisosControl.html.twig", 14)->display($context);
+        $this->loadTemplate("componentes/modalP.html.twig", "PermisosControl.html.twig", 15)->display($context);
         echo " ";
-        $this->loadTemplate("componentes/modalPaginas.html.twig", "PermisosControl.html.twig", 14)->display($context);
-        // line 16
+        $this->loadTemplate("componentes/modalPaginas.html.twig", "PermisosControl.html.twig", 15)->display($context);
+        // line 17
         echo "    </div>
   </div>
 </div>
 <script src=\"https://cdn.jsdelivr.net/npm/sweetalert2@10\"></script>
 <script src=\"";
-        // line 20
+        // line 21
+        echo twig_escape_filter($this->env, $this->env->getFunction('asset')->getCallable()("Plugins/control_permisos/Assets/JS/afetDom.js"), "html", null, true);
+        // line 23
+        echo "\"></script>
+
+<script src=\"";
+        // line 25
         echo twig_escape_filter($this->env, $this->env->getFunction('asset')->getCallable()("Plugins/control_permisos/Assets/DataTables/datatables.js"), "html", null, true);
-        // line 22
+        // line 27
         echo "\"></script>
 <script src=\"";
-        // line 23
+        // line 28
         echo twig_escape_filter($this->env, $this->env->getFunction('asset')->getCallable()("Plugins/control_permisos/Assets/JS/insertarRol.js"), "html", null, true);
-        // line 25
+        // line 30
         echo "\"></script>
 
 <script>
   \$(document).ready(function () {
-    \$(\"#tableMPaginas\").DataTable(); // Inicializa la DataTable
+    \$(\"#tableMPaginas\").DataTable();
+
+    // Seleccionar el campo de búsqueda y agregar la clase \"form-control\"
+    \$('#tableMPaginas_filter input[type=\"search\"]').addClass(\"form-control\");
     \$(\"#tablaDRoles\").DataTable(); // Inicializa la DataTable
+    \$('#tablaDRoles_filter input[type=\"search\"]').addClass(\"form-control\");
 
-    \$(document).on(\"click\", \".btn-primary\", function () {
-      // Obtener el valor de codrole del botón clicado
-      var codrole = \$(this).closest(\"tr\").find(\"th:eq(1)\").text();
+    // Aplicar estilo al input search de la tabla #tablaDRoles
+    \$(\"#tableMPaginas_filter\").css(\"text-align\", \"right\");
 
-      // Asegurarse de que se recoge un valor de codrole
-      if (!codrole) {
-        Swal.fire(
-          \"Error\",
-          \"No se ha podido obtener el valor de codrole\",
-          \"error\"
-        );
-        return;
-      }
-
-      // Antes de realizar la petición, desmarcar todos los checkboxes
-    //  desmarcarCheckboxes();
-
-      var baseUrl = window.location.origin;
-      // URL para la petición AJAX
-      var url = baseUrl + \"/sistema2/SelectUser_rol\";
-
-      // Realizar petición GET a la API
-      \$.get(url, { codrole: codrole })
-        .done(function (data) {
-          // Parsear la respuesta a JSON
-          var response = JSON.parse(data);
-
-          // Verificar si la respuesta contiene un error
-          if (response.error) {
-            Swal.fire(\"Error\", response.error, \"error\");
-            return; // Salir para no ejecutar el código que sigue
-          }
-
-          // Manejar la respuesta del API para marcar los checkboxes
-       /*   response.forEach(function (item) {
-            var pagename = item.pagename;
-            var allowdelete = item.allowdelete;
-
-            // Buscar la fila correspondiente en la tabla por pagename
-            var \$row = \$(\"#tableMPaginas tbody tr\").filter(function () {
-              return \$(this).find(\"td:eq(7)\").text() === pagename;
-            });
-
-            // Marcar los checkboxes correspondientes en esa fila
-            \$row.find(\"td:eq(1) input\").prop(\"checked\", allowdelete);
-            // Y así sucesivamente para los otros checkboxes
-          });*/
-
-          // Mostrar el modal después de marcar los checkboxes
-          \$(\"#modalPagina\").modal(\"show\");
-        })
-        .fail(function (jqXHR, textStatus, errorThrown) {
-          console.error(
-            \"Error al obtener datos: \",
-            textStatus,
-            \", Detalles: \",
-            errorThrown
-          );
-          console.error(\"Respuesta: \", jqXHR.responseText);
-          // Mostrar mensaje de error
-          Swal.fire(
-            \"Error\",
-            \"Hubo un problema con la petición: \" + textStatus,
-            \"error\"
-          );
-        });
-    });
+    // Aplicar estilo al input search de la tabla #tableMPaginas
+    \$(\"#tablaDRoles_filter\").css(\"text-align\", \"right\");
 
     \$(document).on(\"click\", \".access-button\", function () {
+      event.preventDefault(); // Evita la recarga de la página
       var codrole = \$(this).attr(\"data-role\"); // Captura el codrole del botón
       Swal.fire({
         title: \"¿Estás seguro?\",
@@ -187,8 +137,14 @@ class __TwigTemplate_58d2d9b43b80a1eaeb87b6265a69cb53f177e4ebd694dec78cc37569bc8
             success: function (response) {
               console.log(response);
               if (response.status == \"success\") {
-                Swal.fire(\"¡Eliminado!\", response.message, \"success\");
-                window.location.reload(); // Recarga la página después del OK
+                Swal.fire(\"¡Eliminado!\", response.message, \"success\").then(
+                  (result) => {
+                    if (result.isConfirmed) {
+                      window.location.reload(); // Recarga la página después del OK
+                    }
+                  }
+                );
+                // window.location.reload(); // Recarga la página después del OK
               } else if (response.status == \"error\") {
                 Swal.fire(\"Error\", response.message, \"error\");
               }
@@ -213,7 +169,30 @@ class __TwigTemplate_58d2d9b43b80a1eaeb87b6265a69cb53f177e4ebd694dec78cc37569bc8
     e.preventDefault();
     insertRol();
   });
+  // Delegación de eventos para los checkboxes
+  \$(document).on(\"change\", \".form-check-input\", function () {
+    var isChecked = \$(this).prop(\"checked\");
+    var checkboxId = \$(this).attr(\"id\");
 
+    var pagename = checkboxId.split(\"_\")[1]; // Obtenemos el nombre de la página
+
+    if (checkboxId.startsWith(\"mostrar_\")) {
+      // Si se cambia el checkbox 'Mostrar'
+      if (!isChecked) {
+        \$(\".form-check-input\").prop(\"checked\", false); // Desmarcar todos los checkboxes
+      }
+    } else {
+      // Si se cambia cualquier otro checkbox
+      if (!\$(\"#mostrar_\" + pagename).prop(\"checked\")) {
+        // Si 'Mostrar' no está marcado
+        \$(\"#mostrar_\" + pagename).prop(\"checked\", true); // Marcar 'Mostrar' correspondiente
+      }
+    }
+  });
+
+  \$(document).on(\"hidden.bs.modal\", \"#modalPagina\", function () {
+    desmarcarCheckboxes();
+  });
   // Llamar a la función limpiarModal al cerrar el modal usando jQuery (Bootstrap)
   \$(\"#modalRoles\").on(\"hidden.bs.modal\", function (e) {
     limpiarModal();
@@ -249,7 +228,7 @@ class __TwigTemplate_58d2d9b43b80a1eaeb87b6265a69cb53f177e4ebd694dec78cc37569bc8
 
     public function getDebugInfo()
     {
-        return array (  93 => 25,  91 => 23,  88 => 22,  86 => 20,  80 => 16,  75 => 14,  73 => 13,  68 => 10,  64 => 9,  58 => 7,  56 => 5,  50 => 2,  36 => 1,);
+        return array (  100 => 30,  98 => 28,  95 => 27,  93 => 25,  89 => 23,  87 => 21,  81 => 17,  76 => 15,  74 => 14,  69 => 11,  65 => 10,  58 => 7,  56 => 5,  50 => 2,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -262,6 +241,7 @@ class __TwigTemplate_58d2d9b43b80a1eaeb87b6265a69cb53f177e4ebd694dec78cc37569bc8
     asset('Plugins/control_permisos/Assets/DataTables/datatables.css')
   }}\"
 />
+
 {% endblock %} {% block body %}
 <div class=\"container-fluid\">
   <div class=\"row\">
@@ -274,6 +254,10 @@ class __TwigTemplate_58d2d9b43b80a1eaeb87b6265a69cb53f177e4ebd694dec78cc37569bc8
 </div>
 <script src=\"https://cdn.jsdelivr.net/npm/sweetalert2@10\"></script>
 <script src=\"{{
+    asset('Plugins/control_permisos/Assets/JS/afetDom.js')
+  }}\"></script>
+
+<script src=\"{{
     asset('Plugins/control_permisos/Assets/DataTables/datatables.js')
   }}\"></script>
 <script src=\"{{
@@ -282,78 +266,21 @@ class __TwigTemplate_58d2d9b43b80a1eaeb87b6265a69cb53f177e4ebd694dec78cc37569bc8
 
 <script>
   \$(document).ready(function () {
-    \$(\"#tableMPaginas\").DataTable(); // Inicializa la DataTable
+    \$(\"#tableMPaginas\").DataTable();
+
+    // Seleccionar el campo de búsqueda y agregar la clase \"form-control\"
+    \$('#tableMPaginas_filter input[type=\"search\"]').addClass(\"form-control\");
     \$(\"#tablaDRoles\").DataTable(); // Inicializa la DataTable
+    \$('#tablaDRoles_filter input[type=\"search\"]').addClass(\"form-control\");
 
-    \$(document).on(\"click\", \".btn-primary\", function () {
-      // Obtener el valor de codrole del botón clicado
-      var codrole = \$(this).closest(\"tr\").find(\"th:eq(1)\").text();
+    // Aplicar estilo al input search de la tabla #tablaDRoles
+    \$(\"#tableMPaginas_filter\").css(\"text-align\", \"right\");
 
-      // Asegurarse de que se recoge un valor de codrole
-      if (!codrole) {
-        Swal.fire(
-          \"Error\",
-          \"No se ha podido obtener el valor de codrole\",
-          \"error\"
-        );
-        return;
-      }
-
-      // Antes de realizar la petición, desmarcar todos los checkboxes
-    //  desmarcarCheckboxes();
-
-      var baseUrl = window.location.origin;
-      // URL para la petición AJAX
-      var url = baseUrl + \"/sistema2/SelectUser_rol\";
-
-      // Realizar petición GET a la API
-      \$.get(url, { codrole: codrole })
-        .done(function (data) {
-          // Parsear la respuesta a JSON
-          var response = JSON.parse(data);
-
-          // Verificar si la respuesta contiene un error
-          if (response.error) {
-            Swal.fire(\"Error\", response.error, \"error\");
-            return; // Salir para no ejecutar el código que sigue
-          }
-
-          // Manejar la respuesta del API para marcar los checkboxes
-       /*   response.forEach(function (item) {
-            var pagename = item.pagename;
-            var allowdelete = item.allowdelete;
-
-            // Buscar la fila correspondiente en la tabla por pagename
-            var \$row = \$(\"#tableMPaginas tbody tr\").filter(function () {
-              return \$(this).find(\"td:eq(7)\").text() === pagename;
-            });
-
-            // Marcar los checkboxes correspondientes en esa fila
-            \$row.find(\"td:eq(1) input\").prop(\"checked\", allowdelete);
-            // Y así sucesivamente para los otros checkboxes
-          });*/
-
-          // Mostrar el modal después de marcar los checkboxes
-          \$(\"#modalPagina\").modal(\"show\");
-        })
-        .fail(function (jqXHR, textStatus, errorThrown) {
-          console.error(
-            \"Error al obtener datos: \",
-            textStatus,
-            \", Detalles: \",
-            errorThrown
-          );
-          console.error(\"Respuesta: \", jqXHR.responseText);
-          // Mostrar mensaje de error
-          Swal.fire(
-            \"Error\",
-            \"Hubo un problema con la petición: \" + textStatus,
-            \"error\"
-          );
-        });
-    });
+    // Aplicar estilo al input search de la tabla #tableMPaginas
+    \$(\"#tablaDRoles_filter\").css(\"text-align\", \"right\");
 
     \$(document).on(\"click\", \".access-button\", function () {
+      event.preventDefault(); // Evita la recarga de la página
       var codrole = \$(this).attr(\"data-role\"); // Captura el codrole del botón
       Swal.fire({
         title: \"¿Estás seguro?\",
@@ -375,8 +302,14 @@ class __TwigTemplate_58d2d9b43b80a1eaeb87b6265a69cb53f177e4ebd694dec78cc37569bc8
             success: function (response) {
               console.log(response);
               if (response.status == \"success\") {
-                Swal.fire(\"¡Eliminado!\", response.message, \"success\");
-                window.location.reload(); // Recarga la página después del OK
+                Swal.fire(\"¡Eliminado!\", response.message, \"success\").then(
+                  (result) => {
+                    if (result.isConfirmed) {
+                      window.location.reload(); // Recarga la página después del OK
+                    }
+                  }
+                );
+                // window.location.reload(); // Recarga la página después del OK
               } else if (response.status == \"error\") {
                 Swal.fire(\"Error\", response.message, \"error\");
               }
@@ -401,7 +334,30 @@ class __TwigTemplate_58d2d9b43b80a1eaeb87b6265a69cb53f177e4ebd694dec78cc37569bc8
     e.preventDefault();
     insertRol();
   });
+  // Delegación de eventos para los checkboxes
+  \$(document).on(\"change\", \".form-check-input\", function () {
+    var isChecked = \$(this).prop(\"checked\");
+    var checkboxId = \$(this).attr(\"id\");
 
+    var pagename = checkboxId.split(\"_\")[1]; // Obtenemos el nombre de la página
+
+    if (checkboxId.startsWith(\"mostrar_\")) {
+      // Si se cambia el checkbox 'Mostrar'
+      if (!isChecked) {
+        \$(\".form-check-input\").prop(\"checked\", false); // Desmarcar todos los checkboxes
+      }
+    } else {
+      // Si se cambia cualquier otro checkbox
+      if (!\$(\"#mostrar_\" + pagename).prop(\"checked\")) {
+        // Si 'Mostrar' no está marcado
+        \$(\"#mostrar_\" + pagename).prop(\"checked\", true); // Marcar 'Mostrar' correspondiente
+      }
+    }
+  });
+
+  \$(document).on(\"hidden.bs.modal\", \"#modalPagina\", function () {
+    desmarcarCheckboxes();
+  });
   // Llamar a la función limpiarModal al cerrar el modal usando jQuery (Bootstrap)
   \$(\"#modalRoles\").on(\"hidden.bs.modal\", function (e) {
     limpiarModal();

@@ -21,37 +21,99 @@
         </button>
       </div>
       <div class="modal-body">
-        <!-- Tabla -->
-        <table class="table table-bordered dataTable" id="tableMPaginas">
-          <thead>
-            <tr>
-              
-              <th>Menú</th>
-              <th>Mostrar</th>
-              <th>Mostrar solo registros del usuario</th>
-              <th>Permitir modificar</th>
-              <th>Permitir importar</th>
-              <th>Permitir exportar</th>
-              <th>Permitir eliminar</th>
-              <th  style="display: none;">|||</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for page in fsc.pages %}
-            <tr>
-              
-                <td>{{ page.title }}</td>
-                <td><input type="checkbox" /></td>
-                <td><input type="checkbox" /></td>
-                <td><input type="checkbox" /></td>
-                <td><input type="checkbox" /></td>
-                <td><input type="checkbox" /></td>
-                <td><input type="checkbox" /></td>
-                <td id="nameModalPaginas_{{ loop.index }}" style="display: none;">{{ page.name }}</td> <!-- añadida columna oculta name -->
-            </tr>
-        {% endfor %}
-          </tbody>
-        </table>
+        <!-- Card para la tabla -->
+        <div class="card">
+          <div class="card-body">
+            <!-- Tabla -->
+            <div class="table-responsive">
+              <table class="table table-bordered dataTable" id="tableMPaginas">
+                <thead>
+                  <tr>
+                    <th>Menú</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for page in fsc.pages %}
+                  <tr id="{{ page.name }}">
+                    <td>{{ page.menu }}>>{{ page.title }}</td>
+                    <td>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          value=""
+                          id="mostrar_{{ page.name }}"
+                        />
+                        <label class="form-check-label" for="mostrar_{{ page.name }}">
+                          Mostrar
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          value=""
+                          id="onlyownerdata_{{ page.name }}"
+                        />
+                        <label class="form-check-label" for="onlyownerdata_{{ page.name }}">
+                          Mostrar solo registros del usuario
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          value=""
+                          id="allowupdate_{{ page.name }}"
+                        />
+                        <label class="form-check-label" for="allowupdate_{{ page.name }}">
+                          Permitir modificar
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          value=""
+                          id="allowimport_{{ page.name }}"
+                        />
+                        <label class="form-check-label" for="allowimport_{{ page.name }}">
+                          Permitir importar
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          value=""
+                          id="allowexport_{{ page.name }}"
+                        />
+                        <label class="form-check-label" for="allowexport_{{ page.name }}">
+                          Permitir exportar
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          value=""
+                          id="allowdelete_{{ page.name }}"
+                        />
+                        <label class="form-check-label" for="allowdelete_{{ page.name }}">
+                          Permitir eliminar
+                        </label>
+                      </div>
+                    </td>
+
+                   
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">

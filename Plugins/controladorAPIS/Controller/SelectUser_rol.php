@@ -12,6 +12,7 @@ class SelectUser_rol extends Controller
         $pagedata = parent::getPageData();
         $pagedata['title'] = 'SelectUser_rol';
         $pagedata['menu'] = 'public';
+        $pagedata['showonmenu'] = false; // Esta es la opción que evitará que aparezca en el menú
         return $pagedata;
     }
 
@@ -35,11 +36,11 @@ class SelectUser_rol extends Controller
             $roleAccessRecords = $roleAccessModel->all($where);
 
             // lanzar una excepción si no se encuentra ningún registro
-            if (empty($roleAccessRecords)) {
+            /* if (empty($roleAccessRecords)) {
                 throw new \Exception(
                     'No se encontraron registros para el codrole proporcionado'
                 );
-            }
+            }*/
 
             // devuelve los registros como respuesta JSON
             $response->setContent(json_encode($roleAccessRecords));

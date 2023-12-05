@@ -13,6 +13,7 @@ class RolesUsuarios extends Controller
         $pagedata = parent::getPageData();
         $pagedata['title'] = 'RolesUsuarios';
         $pagedata['menu'] = 'public';
+        $pagedata['showonmenu'] = false; // Esta es la opción que evitará que aparezca en el menú
         return $pagedata;
     }
 

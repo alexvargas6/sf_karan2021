@@ -56,7 +56,7 @@ class __TwigTemplate_a3ae8911d77331d7bc6831da2756d28c3cdec14b004246969c3e1a61095
                         <label for=\"descripcion\">Descripción:</label>
                         <textarea class=\"form-control\" id=\"descripcion\" name=\"descripcion\" maxlength=\"150\" required></textarea>
                     </div>
-                    <button type=\"submit\" class=\"btn btn-primary\" id=\"guardarRol\">Guardar Rol</button>
+                    <button type=\"submit\" class=\"btn btn-info\" id=\"guardarRol\">Guardar Rol</button>
                 </form>
             </div>
         </div>
@@ -99,7 +99,7 @@ class __TwigTemplate_a3ae8911d77331d7bc6831da2756d28c3cdec14b004246969c3e1a61095
                         <label for=\"descripcion\">Descripción:</label>
                         <textarea class=\"form-control\" id=\"descripcion\" name=\"descripcion\" maxlength=\"150\" required></textarea>
                     </div>
-                    <button type=\"submit\" class=\"btn btn-primary\" id=\"guardarRol\">Guardar Rol</button>
+                    <button type=\"submit\" class=\"btn btn-info\" id=\"guardarRol\">Guardar Rol</button>
                 </form>
             </div>
         </div>
