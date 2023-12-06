@@ -27,6 +27,7 @@ class __TwigTemplate_5d7fede2feca483b740a3b102e922f396331c829578c6d75d8aba3475fa
         $this->blocks = [
             'head' => [$this, 'block_head'],
             'body' => [$this, 'block_body'],
+            'javascripts' => [$this, 'block_javascripts'],
         ];
     }
 
@@ -84,27 +85,45 @@ class __TwigTemplate_5d7fede2feca483b740a3b102e922f396331c829578c6d75d8aba3475fa
         $this->loadTemplate("componentes/modal.html.twig", "AsignacionUsuariosController.html.twig", 19)->display(twig_array_merge($context, ["roles" => twig_get_attribute($this->env, $this->source, ($context["fsc"] ?? null), "roles", [], "any", false, false, false, 19)]));
         // line 20
         echo "<script src=\"https://cdn.jsdelivr.net/npm/sweetalert2@10\"></script>
+<script></script>
 <script src=\"";
-        // line 21
+        // line 22
         echo twig_escape_filter($this->env, $this->env->getFunction('asset')->getCallable()("Plugins/asignacion_usuarios/Assets/DataTables/datatables.js"), "html", null, true);
-        // line 23
-        echo "\"></script>
-<script src=\"";
         // line 24
+        echo "\"></script>
+<script src=\"";
+        // line 25
         echo twig_escape_filter($this->env, $this->env->getFunction('asset')->getCallable()("Plugins/asignacion_usuarios/Assets/JS/dom.js"), "html", null, true);
-        // line 26
-        echo "\"></script>
-<script src=\"";
         // line 27
-        echo twig_escape_filter($this->env, $this->env->getFunction('asset')->getCallable()("Plugins/asignacion_usuarios/Assets/JS/getRoles.js"), "html", null, true);
-        // line 29
         echo "\"></script>
 <script src=\"";
+        // line 28
+        echo twig_escape_filter($this->env, $this->env->getFunction('asset')->getCallable()("Plugins/asignacion_usuarios/Assets/JS/getRoles.js"), "html", null, true);
         // line 30
+        echo "\"></script>
+<script src=\"";
+        // line 31
         echo twig_escape_filter($this->env, $this->env->getFunction('asset')->getCallable()("Plugins/asignacion_usuarios/Assets/JS/insertUs.js"), "html", null, true);
-        // line 32
+        // line 33
         echo "\"></script>
 
+";
+    }
+
+    // line 35
+    public function block_javascripts($context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        // line 36
+        $this->displayParentBlock("javascripts", $context, $blocks);
+        echo "
+<script>
+  var fsRouteJS = \"";
+        // line 38
+        echo twig_escape_filter($this->env, ($context["fs_route"] ?? null), "html", null, true);
+        echo "\";
+  console.log(fsRouteJS);
+</script>
 ";
     }
 
@@ -120,7 +139,7 @@ class __TwigTemplate_5d7fede2feca483b740a3b102e922f396331c829578c6d75d8aba3475fa
 
     public function getDebugInfo()
     {
-        return array (  106 => 32,  104 => 30,  101 => 29,  99 => 27,  96 => 26,  94 => 24,  91 => 23,  89 => 21,  86 => 20,  84 => 19,  79 => 16,  77 => 15,  75 => 14,  73 => 13,  68 => 10,  64 => 9,  58 => 7,  56 => 5,  50 => 2,  36 => 1,);
+        return array (  123 => 38,  118 => 36,  114 => 35,  108 => 33,  106 => 31,  103 => 30,  101 => 28,  98 => 27,  96 => 25,  93 => 24,  91 => 22,  87 => 20,  85 => 19,  80 => 16,  78 => 15,  76 => 14,  74 => 13,  69 => 10,  65 => 9,  59 => 7,  57 => 5,  51 => 2,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -145,6 +164,7 @@ class __TwigTemplate_5d7fede2feca483b740a3b102e922f396331c829578c6d75d8aba3475fa
 </div>
 {% include 'componentes/modal.html.twig' with { 'roles': fsc.roles } %}
 <script src=\"https://cdn.jsdelivr.net/npm/sweetalert2@10\"></script>
+<script></script>
 <script src=\"{{
     asset('Plugins/asignacion_usuarios/Assets/DataTables/datatables.js')
   }}\"></script>
@@ -158,7 +178,13 @@ class __TwigTemplate_5d7fede2feca483b740a3b102e922f396331c829578c6d75d8aba3475fa
     asset('Plugins/asignacion_usuarios/Assets/JS/insertUs.js')
   }}\"></script>
 
+{% endblock %} {% block javascripts %}
+{{ parent() }}
+<script>
+  var fsRouteJS = \"{{ fs_route }}\";
+  console.log(fsRouteJS);
+</script>
 {% endblock %}
-", "AsignacionUsuariosController.html.twig", "C:\\xampp\\htdocs\\sistema2\\Plugins\\asignacion_usuarios\\View\\AsignacionUsuariosController.html.twig");
+", "AsignacionUsuariosController.html.twig", "C:\\xampp\\htdocs\\public\\Plugins\\asignacion_usuarios\\View\\AsignacionUsuariosController.html.twig");
     }
 }

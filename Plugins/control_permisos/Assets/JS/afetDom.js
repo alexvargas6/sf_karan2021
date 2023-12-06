@@ -10,7 +10,7 @@
       return;
     }
     var baseUrl = window.location.origin;
-    var url = baseUrl + "/sistema2/editrole";
+    var url = baseUrl + "/public/editrole";
     window.location.href = url + "?code=" + codrole;
     /*  try {
       var codrole = $(this).closest("tr").find("th:eq(1)").text();
@@ -25,7 +25,7 @@
       }
 
       var baseUrl = window.location.origin;
-      var url = baseUrl + "/sistema2/SelectUser_rol";
+      var url = baseUrl + "/public/SelectUser_rol";
 
       $.get(url, { codrole: codrole })
         .done(function (data) {

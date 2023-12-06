@@ -45,6 +45,7 @@
     $("#tablaDRoles_filter").css("text-align", "right");
 
     $(document).on("click", ".access-button", function () {
+      event.preventDefault(); // Evita la recarga de la página
       var codrole = $(this).attr("data-role"); // Captura el codrole del botón
       Swal.fire({
         title: "¿Estás seguro?",
@@ -58,7 +59,7 @@
         if (result.isConfirmed) {
           var baseUrl = window.location.origin;
           // toma la url para la petición AJAX
-          const url = baseUrl + "/sistema2/DeleteRole";
+          const url = baseUrl + "/public/DeleteRole";
           $.ajax({
             url: url,
             type: "POST",
@@ -66,8 +67,14 @@
             success: function (response) {
               console.log(response);
               if (response.status == "success") {
-                Swal.fire("¡Eliminado!", response.message, "success");
-                window.location.reload(); // Recarga la página después del OK
+                Swal.fire("¡Eliminado!", response.message, "success").then(
+                  (result) => {
+                    if (result.isConfirmed) {
+                      window.location.reload(); // Recarga la página después del OK
+                    }
+                  }
+                );
+                // window.location.reload(); // Recarga la página después del OK
               } else if (response.status == "error") {
                 Swal.fire("Error", response.message, "error");
               }

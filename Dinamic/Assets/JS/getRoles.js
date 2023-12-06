@@ -10,11 +10,12 @@ $("tbody").on("click", ".botonTabla", function () {
 
   // Lo establecemos en la etiqueta del modal
   $("#permisosModalLabel").text(ml + nick);
-
+  //var fsRouteJS = '{{ fsc.fs_route }}';
   var baseUrl = window.location.origin;
+  //console.log("FS URL: " + fsRouteJS);
   // Llamar a la función AJAX que devuelve los roles de usuario
   $.ajax({
-    url: baseUrl + "/sistema2/RolesUsuarios",
+    url: baseUrl + "/public/RolesUsuarios",
     method: "GET",
     headers: {
       Token: "API_TOKEN",

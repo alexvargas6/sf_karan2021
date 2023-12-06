@@ -1,6 +1,6 @@
 <?php
 define('FS_COOKIES_EXPIRE', 31536000);
-define('FS_ROUTE', '/sistema2');
+define('FS_ROUTE', '/public');
 define('FS_DB_FOREIGN_KEYS', true);
 define('FS_DB_TYPE_CHECK', true);
 define('FS_MYSQL_CHARSET', 'utf8');

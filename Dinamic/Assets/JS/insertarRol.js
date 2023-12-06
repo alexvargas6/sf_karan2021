@@ -6,7 +6,7 @@ function insertRol() {
   const descripcion = $("#descripcion").val();
   var baseUrl = window.location.origin;
   // toma la url para la petición AJAX
-  const url = baseUrl + "/sistema2/InserRol";
+  const url = baseUrl + "/public/InserRol";
 
   // prepara el objeto de datos para pasar a la solicitud AJAX
   var data = {

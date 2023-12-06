@@ -18,6 +18,7 @@
 </div>
 {% include 'componentes/modal.html.twig' with { 'roles': fsc.roles } %}
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script></script>
 <script src="{{
     asset('Plugins/asignacion_usuarios/Assets/DataTables/datatables.js')
   }}"></script>
@@ -31,4 +32,10 @@
     asset('Plugins/asignacion_usuarios/Assets/JS/insertUs.js')
   }}"></script>
 
+{% endblock %} {% block javascripts %}
+{{ parent() }}
+<script>
+  var fsRouteJS = "{{ fs_route }}";
+  console.log(fsRouteJS);
+</script>
 {% endblock %}

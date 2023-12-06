@@ -7,7 +7,7 @@ $("#btn-guardar").click(function () {
   const usuario = $("#nick").val();
   var baseUrl = window.location.origin;
   // toma la url para la petición AJAX
-  const url = baseUrl + "/sistema2/InsertRolesUsuarios";
+  const url = baseUrl + "/public/InsertRolesUsuarios";
 
   // toma los roles actuales
   const rolesNuevos = getNewRoles();

@@ -10,12 +10,14 @@ class AsignacionUsuariosController extends Controller
 {
     public $users;
     public $roles;
+    public $fsRoute;
     public function getPageData(): array
     {
         $pagedata = parent::getPageData();
         $pagedata['title'] = 'Asignacion de usuarios';
         $pagedata['menu'] = 'control';
         $pagedata['icon'] = 'fas fa-users';
+        // $data['fs_route'] = '/public';
 
         return $pagedata;
     }
@@ -29,5 +31,6 @@ class AsignacionUsuariosController extends Controller
 
         $roleModel = new Role(); // creamos instancia del modelo Role
         $this->roles = $roleModel->all(); // cargamos todos los roles en la propiedad roles.
+        $this->fsRoute = '/public';
     }
 }
