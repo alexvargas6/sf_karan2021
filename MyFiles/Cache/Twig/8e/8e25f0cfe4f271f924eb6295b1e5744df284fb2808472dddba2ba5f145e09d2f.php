@@ -129,7 +129,7 @@ class __TwigTemplate_58d2d9b43b80a1eaeb87b6265a69cb53f177e4ebd694dec78cc37569bc8
         if (result.isConfirmed) {
           var baseUrl = window.location.origin;
           // toma la url para la petición AJAX
-          const url = baseUrl + \"/sistema2/DeleteRole\";
+          const url = baseUrl + \"/public/DeleteRole\";
           \$.ajax({
             url: url,
             type: \"POST\",
@@ -294,7 +294,7 @@ class __TwigTemplate_58d2d9b43b80a1eaeb87b6265a69cb53f177e4ebd694dec78cc37569bc8
         if (result.isConfirmed) {
           var baseUrl = window.location.origin;
           // toma la url para la petición AJAX
-          const url = baseUrl + \"/sistema2/DeleteRole\";
+          const url = baseUrl + \"/public/DeleteRole\";
           \$.ajax({
             url: url,
             type: \"POST\",
@@ -379,6 +379,6 @@ class __TwigTemplate_58d2d9b43b80a1eaeb87b6265a69cb53f177e4ebd694dec78cc37569bc8
   }
 </script>
 {% endblock %}
-", "PermisosControl.html.twig", "C:\\xampp\\htdocs\\sistema2\\Plugins\\control_permisos\\View\\PermisosControl.html.twig");
+", "PermisosControl.html.twig", "C:\\xampp\\htdocs\\public\\Plugins\\control_permisos\\View\\PermisosControl.html.twig");
     }
 }
