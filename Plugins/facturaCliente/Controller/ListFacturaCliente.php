@@ -95,7 +95,7 @@ class ListFacturaCliente extends ListBusinessDocument
             '<='
         );
 
-        $currencies = Divisas::codeModel();
+        /* $currencies = Divisas::codeModel();
         if (count($currencies) > 2) {
             $this->addFilterSelect(
                 $viewName,
@@ -104,7 +104,7 @@ class ListFacturaCliente extends ListBusinessDocument
                 'coddivisa',
                 $currencies
             );
-        }
+        }*/
 
         $payMethods = FormasPago::codeModel();
         if (count($payMethods) > 2) {

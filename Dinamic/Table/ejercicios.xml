@@ -47,4 +47,7 @@
         <name>ca_ejercicios_empresas</name>
         <type>FOREIGN KEY (idempresa) REFERENCES empresas (idempresa) ON DELETE CASCADE ON UPDATE CASCADE</type>
     </constraint>
-</table>
+<column>
+        <name>impsociedades</name>
+        <type>float</type>
+    </column></table>

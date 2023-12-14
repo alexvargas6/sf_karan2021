@@ -116,7 +116,7 @@
         "post_enable": false,
         "require": [],
         "require_php": [],
-        "version": 1
+        "version": 2
     },
     {
         "compatible": true,
@@ -130,9 +130,43 @@
         "name": "listView",
         "order": 7,
         "post_disable": false,
-        "post_enable": true,
+        "post_enable": false,
         "require": [],
         "require_php": [],
         "version": 1
+    },
+    {
+        "compatible": false,
+        "description": "unknown",
+        "enabled": false,
+        "folder": "bases",
+        "hidden": false,
+        "installed": false,
+        "min_version": 0,
+        "min_php": 7.2,
+        "name": "bases",
+        "order": 0,
+        "post_disable": false,
+        "post_enable": false,
+        "require": [],
+        "require_php": [],
+        "version": 0
+    },
+    {
+        "compatible": true,
+        "description": "Muestras informes de resultados anual, tesorer\u00eda y desgloses de compras y ventas.",
+        "enabled": true,
+        "folder": "Informes",
+        "hidden": false,
+        "installed": true,
+        "min_version": 2022.6,
+        "min_php": 7.2,
+        "name": "Informes",
+        "order": 8,
+        "post_disable": false,
+        "post_enable": false,
+        "require": [],
+        "require_php": [],
+        "version": 2.5
     }
 ]

@@ -50,7 +50,11 @@ class ListFacturaCliente extends ListBusinessDocument
     protected function createViews()
     {
         // listado de facturas de cliente
-        $this->createViewSales('ListFacturaCliente', 'FacturaCliente', 'invoices');
+        $this->createViewSales(
+            'ListFacturaCliente',
+            'FacturaCliente',
+            'invoices'
+        );
 
         // si el usuario solamente tiene permiso para ver lo suyo, no añadimos el resto de pestañas
         if ($this->permissions->onlyOwnerData) {
@@ -58,7 +62,10 @@ class ListFacturaCliente extends ListBusinessDocument
         }
 
         // líneas de facturas de cliente
-        $this->createViewLines('ListLineaFacturaCliente', 'LineaFacturaCliente');
+        $this->createViewLines(
+            'ListLineaFacturaCliente',
+            'LineaFacturaCliente'
+        );
 
         // recibos de cliente
         $this->createViewReceipts();
@@ -67,9 +74,15 @@ class ListFacturaCliente extends ListBusinessDocument
         $this->createViewRefunds();
     }
 
-    protected function createViewReceipts(string $viewName = 'ListReciboCliente')
-    {
-        $this->addView($viewName, 'ReciboCliente', 'receipts', 'fas fa-dollar-sign');
+    protected function createViewReceipts(
+        string $viewName = 'ListReciboCliente'
+    ) {
+        $this->addView(
+            $viewName,
+            'ReciboCliente',
+            'receipts',
+            'fas fa-dollar-sign'
+        );
         $this->addOrderBy($viewName, ['codcliente'], 'customer-code');
         $this->addOrderBy($viewName, ['fecha', 'idrecibo'], 'date');
         $this->addOrderBy($viewName, ['fechapago'], 'payment-date');
@@ -78,29 +91,78 @@ class ListFacturaCliente extends ListBusinessDocument
         $this->addSearchFields($viewName, ['codigofactura', 'observaciones']);
 
         // filtros
-        $this->addFilterPeriod($viewName, 'expiration', 'expiration', 'vencimiento');
-        $this->addFilterAutocomplete($viewName, 'codcliente', 'customer', 'codcliente', 'Cliente');
-        $this->addFilterNumber($viewName, 'min-total', 'amount', 'importe', '>=');
-        $this->addFilterNumber($viewName, 'max-total', 'amount', 'importe', '<=');
+        $this->addFilterPeriod(
+            $viewName,
+            'expiration',
+            'expiration',
+            'vencimiento'
+        );
+        $this->addFilterAutocomplete(
+            $viewName,
+            'codcliente',
+            'customer',
+            'codcliente',
+            'Cliente'
+        );
+        $this->addFilterNumber(
+            $viewName,
+            'min-total',
+            'amount',
+            'importe',
+            '>='
+        );
+        $this->addFilterNumber(
+            $viewName,
+            'max-total',
+            'amount',
+            'importe',
+            '<='
+        );
 
         $currencies = Divisas::codeModel();
         if (count($currencies) > 2) {
-            $this->addFilterSelect($viewName, 'coddivisa', 'currency', 'coddivisa', $currencies);
+            $this->addFilterSelect(
+                $viewName,
+                'coddivisa',
+                'currency',
+                'coddivisa',
+                $currencies
+            );
         }
 
         $payMethods = FormasPago::codeModel();
         if (count($payMethods) > 2) {
-            $this->addFilterSelect($viewName, 'codpago', 'payment-method', 'codpago', $payMethods);
+            $this->addFilterSelect(
+                $viewName,
+                'codpago',
+                'payment-method',
+                'codpago',
+                $payMethods
+            );
         }
 
         $i18n = $this->toolBox()->i18n();
         $this->addFilterSelectWhere($viewName, 'status', [
             ['label' => $i18n->trans('paid-or-unpaid'), 'where' => []],
-            ['label' => $i18n->trans('paid'), 'where' => [new DataBaseWhere('pagado', true)]],
-            ['label' => $i18n->trans('unpaid'), 'where' => [new DataBaseWhere('pagado', false)]],
-            ['label' => $i18n->trans('expired-receipt'), 'where' => [new DataBaseWhere('vencido', true)]],
+            [
+                'label' => $i18n->trans('paid'),
+                'where' => [new DataBaseWhere('pagado', true)],
+            ],
+            [
+                'label' => $i18n->trans('unpaid'),
+                'where' => [new DataBaseWhere('pagado', false)],
+            ],
+            [
+                'label' => $i18n->trans('expired-receipt'),
+                'where' => [new DataBaseWhere('vencido', true)],
+            ],
         ]);
-        $this->addFilterPeriod($viewName, 'payment-date', 'payment-date', 'fechapago');
+        $this->addFilterPeriod(
+            $viewName,
+            'payment-date',
+            'payment-date',
+            'fechapago'
+        );
 
         // botones
         $this->addButtonPayReceipt($viewName);
@@ -109,10 +171,21 @@ class ListFacturaCliente extends ListBusinessDocument
         $this->setSettings($viewName, 'btnNew', false);
     }
 
-    protected function createViewRefunds(string $viewName = 'ListFacturaCliente-rect')
-    {
-        $this->addView($viewName, 'FacturaCliente', 'refunds', 'fas fa-share-square');
-        $this->addSearchFields($viewName, ['codigo', 'codigorect', 'numero2', 'observaciones']);
+    protected function createViewRefunds(
+        string $viewName = 'ListFacturaCliente-rect'
+    ) {
+        $this->addView(
+            $viewName,
+            'FacturaCliente',
+            'refunds',
+            'fas fa-share-square'
+        );
+        $this->addSearchFields($viewName, [
+            'codigo',
+            'codigorect',
+            'numero2',
+            'observaciones',
+        ]);
         $this->addOrderBy($viewName, ['fecha', 'idfactura'], 'date', 2);
         $this->addOrderBy($viewName, ['total'], 'total');
 
@@ -122,9 +195,11 @@ class ListFacturaCliente extends ListBusinessDocument
         // añadimos un filtro select where para forzar las que tienen idfacturarect
         $this->addFilterSelectWhere($viewName, 'idfacturarect', [
             [
-                'label' => self::toolBox()::i18n()->trans('rectified-invoices'),
-                'where' => [new DataBaseWhere('idfacturarect', null, 'IS NOT')]
-            ]
+                'label' => self::toolBox()
+                    ::i18n()
+                    ->trans('rectified-invoices'),
+                'where' => [new DataBaseWhere('idfacturarect', null, 'IS NOT')],
+            ],
         ]);
 
         // desactivamos el botón nuevo
@@ -134,8 +209,11 @@ class ListFacturaCliente extends ListBusinessDocument
         $this->views[$viewName]->disableColumn('original', false);
     }
 
-    protected function createViewSales(string $viewName, string $modelName, string $label)
-    {
+    protected function createViewSales(
+        string $viewName,
+        string $modelName,
+        string $label
+    ) {
         parent::createViewSales($viewName, $modelName, $label);
         $this->addSearchFields($viewName, ['codigorect']);
 
@@ -143,11 +221,27 @@ class ListFacturaCliente extends ListBusinessDocument
         $i18n = $this->toolBox()->i18n();
         $this->addFilterSelectWhere($viewName, 'status', [
             ['label' => $i18n->trans('paid-or-unpaid'), 'where' => []],
-            ['label' => $i18n->trans('paid'), 'where' => [new DataBaseWhere('pagada', true)]],
-            ['label' => $i18n->trans('unpaid'), 'where' => [new DataBaseWhere('pagada', false)]],
-            ['label' => $i18n->trans('expired-receipt'), 'where' => [new DataBaseWhere('vencida', true)]],
+            [
+                'label' => $i18n->trans('paid'),
+                'where' => [new DataBaseWhere('pagada', true)],
+            ],
+            [
+                'label' => $i18n->trans('unpaid'),
+                'where' => [new DataBaseWhere('pagada', false)],
+            ],
+            [
+                'label' => $i18n->trans('expired-receipt'),
+                'where' => [new DataBaseWhere('vencida', true)],
+            ],
         ]);
-        $this->addFilterCheckbox($viewName, 'idasiento', 'invoice-without-acc-entry', 'idasiento', 'IS', null);
+        $this->addFilterCheckbox(
+            $viewName,
+            'idasiento',
+            'invoice-without-acc-entry',
+            'idasiento',
+            'IS',
+            null
+        );
 
         // añadimos botón de bloquear facturas
         $this->addButtonLockInvoice($viewName);
@@ -158,7 +252,7 @@ class ListFacturaCliente extends ListBusinessDocument
             $this->addButton($viewName, [
                 'action' => 'look-for-gaps',
                 'icon' => 'fas fa-exclamation-triangle',
-                'label' => 'look-for-gaps'
+                'label' => 'look-for-gaps',
             ]);
         }
     }
@@ -180,14 +274,18 @@ class ListFacturaCliente extends ListBusinessDocument
         $invoiceModel = new FacturaCliente();
         $where = [
             new DataBaseWhere('codserie', $sequence->codserie),
-            new DataBaseWhere('idempresa', $sequence->idempresa)
+            new DataBaseWhere('idempresa', $sequence->idempresa),
         ];
         if ($sequence->codejercicio) {
-            $where[] = new DataBaseWhere('codejercicio', $sequence->codejercicio);
+            $where[] = new DataBaseWhere(
+                'codejercicio',
+                $sequence->codejercicio
+            );
         }
-        $orderBy = strtolower(FS_DB_TYPE) == 'postgresql' ?
-            ['CAST(numero as integer)' => 'ASC'] :
-            ['CAST(numero as unsigned)' => 'ASC'];
+        $orderBy =
+            strtolower(FS_DB_TYPE) == 'postgresql'
+                ? ['CAST(numero as integer)' => 'ASC']
+                : ['CAST(numero as unsigned)' => 'ASC'];
         foreach ($invoiceModel->all($where, $orderBy, 0, 0) as $invoice) {
             // si el número de la factura es menor que el de la secuencia, saltamos
             if ($invoice->numero < $sequence->inicio) {
@@ -206,7 +304,7 @@ class ListFacturaCliente extends ListBusinessDocument
                     'codserie' => $invoice->codserie,
                     'numero' => $number,
                     'fecha' => $invoice->fecha,
-                    'idempresa' => $invoice->idempresa
+                    'idempresa' => $invoice->idempresa,
                 ];
                 $number++;
             }
@@ -224,7 +322,7 @@ class ListFacturaCliente extends ListBusinessDocument
         $sequenceModel = new SecuenciaDocumento();
         $where = [
             new DataBaseWhere('tipodoc', 'FacturaCliente'),
-            new DataBaseWhere('usarhuecos', true)
+            new DataBaseWhere('usarhuecos', true),
         ];
         foreach ($sequenceModel->all($where, [], 0, 0) as $sequence) {
             $gaps = array_merge($gaps, $this->lookForGaps($sequence));
@@ -232,18 +330,23 @@ class ListFacturaCliente extends ListBusinessDocument
 
         // si no hemos encontrado huecos, mostramos un mensaje
         if (empty($gaps)) {
-            $this->toolBox()->i18nLog()->notice('no-gaps-found');
+            $this->toolBox()
+                ->i18nLog()
+                ->notice('no-gaps-found');
             return;
         }
 
         // si hemos encontrado huecos, los mostramos uno a uno
         foreach ($gaps as $gap) {
-            $this->toolBox()->i18nLog()->warning('gap-found', [
-                '%codserie%' => Series::get($gap['codserie'])->descripcion,
-                '%numero%' => $gap['numero'],
-                '%fecha%' => $gap['fecha'],
-                '%idempresa%' => Empresas::get($gap['idempresa'])->nombrecorto
-            ]);
+            $this->toolBox()
+                ->i18nLog()
+                ->warning('gap-found', [
+                    '%codserie%' => Series::get($gap['codserie'])->descripcion,
+                    '%numero%' => $gap['numero'],
+                    '%fecha%' => $gap['fecha'],
+                    '%idempresa%' => Empresas::get($gap['idempresa'])
+                        ->nombrecorto,
+                ]);
         }
     }
 }
